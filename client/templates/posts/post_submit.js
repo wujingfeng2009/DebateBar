@@ -15,7 +15,7 @@ Template.postSubmit.events({
             if (result.postExists)
                 alert('This link has already been posted（该链接已经存在）');
 
-            Router.go('postPage', { _id: result._id });
+            Router.go('postsList');
         });
 
     }
