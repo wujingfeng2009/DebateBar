@@ -1,0 +1,6 @@
+<template name="commentChain">
+    {{> postItem}}
+    <ul class="comments">
+        {{#each comments}} {{> commentItem}} {{/each}}
+    </ul>
+</template>
