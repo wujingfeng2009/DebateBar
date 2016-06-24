@@ -96,24 +96,28 @@ body {
 
 .post .post-content h3 a {
     display: inline-block;
-    margin-right: 5px;
+    font-size: 25px;
+    margin-right: 10px;
 }
 
 .post .post-content h3 span {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 20px;
     display: inline-block;
     color: #aaaaaa;
 }
 
 .post .post-content p {
     margin: 0;
+    font-size: 10px;
+    margin-top: 5px;
+    float: bottom;
 }
 
 .post .discuss {
     display: block;
     float: right;
-    margin-top: 7px;
+    margin-top: 10px;
 }
 
 .comments {
@@ -121,18 +125,48 @@ body {
     margin: 0;
 }
 
-.comments li h4 {
-    font-size: 16px;
+.comments li {
+    padding-top: 0;
+}
+
+.comments li .comment:before,
+.comments li .comment:after {
+    content: "";
+    display: table;
+}
+
+.comments li .comment:after {
+    clear: both;
+}
+
+.comment .comment-content {
+    float: left;
     margin: 0;
+    padding-top: 0;
 }
 
-.comments li h4 .date {
-    font-size: 12px;
+.comment .comment-content .author {
+    font-size: 16px;
+    color: orange;
+}
+
+.comment .comment-content .date {
+    font-size: 6px;
     font-weight: normal;
+    color: gray;
 }
 
-.comments li h4 a {
+.comment .comment-content .text {
+    font-size: 20px;
+    margin-top: 5px;
+    padding-top: 0;
+}
+
+.comment .objections {
+    margin-top: 20px;
     font-size: 12px;
+    display: block;
+    float: right;
 }
 
 .comments li p:last-child {
