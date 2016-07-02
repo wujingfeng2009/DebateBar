@@ -39,7 +39,7 @@ Template.postEdit.events({
                 throwError('current user is not allowed to update current post[' + currentPostId + ']!');
             }
 
-            Router.go('postsList');
+            Router.go('home');
         });
     },
 
@@ -54,7 +54,7 @@ Template.postEdit.events({
 
             var currentPostId = this._id;
             Posts.remove(currentPostId);
-            Router.go('postsList');
+            Router.go('home');
         }
     }
 });
