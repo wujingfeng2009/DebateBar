@@ -1,6 +1,8 @@
 <template name="postsList">
-    <div class="posts">
+    <div class="posts page">
+      <div class="wrapper">
         {{#each posts}} {{> postItem}} {{/each}}
+      </div>
         {{#if nextRouterPath}}
             <a class="load-more" href="{{nextRouterPath}}">Load more</a>
         {{else}}
