@@ -1,6 +1,9 @@
 <template name="commentChain">
-    {{> postItem}}
+        {{#each parentPost}} {{> postItem}} {{/each}}
+    <div class="comments">
+        {{> commentItem}}
+    </div>
     <ul class="comments">
-        {{#each comments}} {{> commentItem}} {{/each}}
+        {{#each childComments }} {{> commentItem}} {{/each}}
     </ul>
 </template>
