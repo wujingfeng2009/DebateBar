@@ -1,5 +1,5 @@
 <template name="commentChain">
-        {{#each parentPost}} {{> postItem}} {{/each}}
+        {{#with parentPost}} {{> postItem}} {{/with}}
     <div class="mainContext">
         <div class="leftContext">
             <div class="comments">

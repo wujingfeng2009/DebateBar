@@ -4,6 +4,6 @@ Template.commentChain.helpers({
         return Comments.find({ parentId: this._id });
     },
     parentPost: function() {
-        return Posts.find(this.postId);
+        return Posts.findOne(this.postId);
     }
 });
