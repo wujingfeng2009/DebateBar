@@ -8,28 +8,29 @@ Template.postsList.helpers({
 
 Template.postsList.onRendered(function() {
     this.find('.wrapper')._uihooks = {
-        insertElement: function (node, next) {
-          $(node)
-            .hide()
-            .insertBefore(next)
-            .fadeIn();
+        insertElement: function(node, next) {
+            $(node)
+                .hide()
+                .insertBefore(next)
+                .fadeIn();
         },
 
         removeElement: function(node) {
-          $(node).fadeOut(function() {
-            $(this).remove();
-          });
+            $(node).fadeOut(function() {
+                $(this).remove();
+            });
         },
 
         moveElement: function(node, next) {
-            var $node = $(node), $next = $(next);
+            var $node = $(node),
+                $next = $(next);
             var oldTop = $node.offset().top;
             var height = $node.outerHeight(true);
 
             // 找出 next 与 node 之间所有的元素
             var $inBetween = $next.nextUntil(node);
             if ($inBetween.length === 0)
-            $inBetween = $node.nextUntil(next);
+                $inBetween = $node.nextUntil(next);
 
             // 把 node 放在预订位置
             $node.insertBefore(next);
@@ -39,13 +40,13 @@ Template.postsList.onRendered(function() {
 
             // 将 node *移回*至原始所在位置
             $node
-            .removeClass('animate')
-            .css('top', oldTop - newTop);
+                .removeClass('animate')
+                .css('top', oldTop - newTop);
 
             // push every other element down (or up) to put them back
             $inBetween
-            .removeClass('animate')
-            .css('top', oldTop < newTop ? height : -1 * height);
+                .removeClass('animate')
+                .css('top', oldTop < newTop ? height : -1 * height);
 
             // 强制重绘
             $node.offset();

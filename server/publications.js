@@ -1,30 +1,30 @@
 Meteor.publish('posts', function(options) {
-check(options, {
-    sort: Object,
-    limit: Number
-  });
-  return Posts.find({}, {sort: options.sort, limit: options.limit});
+    check(options, {
+        sort: Object,
+        limit: Number
+    });
+    return Posts.find({}, { sort: options.sort, limit: options.limit });
 });
 
 Meteor.publish('singlePost', function(id) {
-  check(id, String)
-  console.log('single post Id: ' + id + '!');
-  return Posts.find(id);
+    check(id, String)
+    console.log('single post Id: ' + id + '!');
+    return Posts.find(id);
 });
 
 Meteor.publish('comments', function(postId) {
-  check(postId, String);
-  return Comments.find({postId: postId});
+    check(postId, String);
+    return Comments.find({ postId: postId });
 });
 
 Meteor.publish('singleComment', function(commentId) {
-  check(commentId, String);
-  return Comments.find(commentId);
+    check(commentId, String);
+    return Comments.find(commentId);
 });
 
 Meteor.publish('commentChain', function(commentId) {
-  check(commentId, String);
-  return Comments.find({chainHeadId: commentId});
+    check(commentId, String);
+    return Comments.find({ chainHeadId: commentId });
 });
 
 Meteor.publish('commentParentPost', function(commentId) {
@@ -39,5 +39,5 @@ Meteor.publish('commentParentPost', function(commentId) {
 });
 
 Meteor.publish('notifications', function() {
-  return Notifications.find({userId: this.userId, read: false});
+    return Notifications.find({ userId: this.userId, read: false });
 });
