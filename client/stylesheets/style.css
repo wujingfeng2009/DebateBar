@@ -194,6 +194,45 @@ body {
     visibility: hidden;
 }
 
+.send {
+/*
+position:relative;
+width:150px;
+height:35px;
+margin:30px auto 0;
+*/
+background:#F8C301;
+border-radius:30px; /* 圆角 */
+}
+
+.send .rightArrow {
+display: block;
+float: right;
+position:relative;
+top:5px;
+right:-65px; /* 圆角的位置需要细心调试哦 */
+width:0;
+height:0;
+font-size:0;
+border:solid;
+border-width: 8px 22px 8px 22px;
+border-color:#eee #eee #eee purple;
+}
+
+.send .leftArrow {
+display: block;
+float: left;
+position:relative;
+top: 5px;
+left:-65px; /* 圆角的位置需要细心调试哦 */
+width:0;
+height:0;
+font-size:0;
+border:solid;
+border-width: 8px 22px 8px 22px;
+border-color:#eee purple #eee #eee;
+}
+
 .dropdown-menu span {
     display: block;
     padding: 3px 20px;

@@ -17,5 +17,16 @@ Template.commentItem.helpers({
     },
     hasChildren: function() {
         return Comments.find({ parentId: this.comment._id }).count() && true;
+    },
+    alignSide: function() {
+        if (this.align === 'left')
+            return 'right';
+        if (this.align === 'right')
+            return 'left';
+        if (this.align === 'right')
+            return '';
+    },
+    arrowNeeded: function() {
+            return this.needArrow;
     }
 });

@@ -1,9 +1,10 @@
 Template.commentChain.helpers({
-    commentArgs: function(comment, align) {
-        console.log('comment[: ' + comment._id + '] align: ' + align);
+    commentArgs: function(comment, align, needArrow) {
+        console.log('comment[: ' + comment._id + '] align: ' + align + 'need arrow: ' + needArrow);
         return {
             comment,
             align: align,
+            needArrow: needArrow,
         };
     },
     childComments: function() {

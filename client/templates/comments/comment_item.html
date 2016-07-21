@@ -1,5 +1,5 @@
 <template name="commentItem">
-    <li class="{{#if visibleDisallowed}}visibleDisallowed{{/if}}">
+    <li class="{{#if visibleDisallowed}}visibleDisallowed{{/if}}  send">
         <div class="comment">
             <div class="comment-content">
                 <p>
@@ -10,5 +10,6 @@
             </div>
             <a href="{{#if hasChildren}} {{commentChainPath}} {{/if}}" class="objections btn btn-default">Objections</a>
         </div>
+        <div class="{{#if arrowNeeded}} {{alignSide}}Arrow {{/if}}"></div>
     </li>
 </template>
