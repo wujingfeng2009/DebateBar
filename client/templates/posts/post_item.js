@@ -5,7 +5,7 @@ Template.postItem.helpers({
     domain: function() {
         var a = document.createElement('a');
         a.href = this.url;
-        console.log('post_item: { href: ' + a.href + ', hostname: ' + a.hostname + '}');
+        //console.log('post_item: { href: ' + a.href + ', hostname: ' + a.hostname + '}');
         return a.hostname;
     },
     upvotedClass: function() {

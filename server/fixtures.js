@@ -24,7 +24,7 @@ if (Posts.find().count() === 0) {
 
     var telescopeComHeadId = Comments.insert({
         chainHeadId: '',
-        parentId: '',
+        parentId: null,
         postId: telescopeId,
         side: 0,
         userId: tom._id,

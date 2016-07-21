@@ -1,14 +1,14 @@
 <template name="commentItem">
-    <li>
+    <li class="{{#if visibleDisallowed}}visibleDisallowed{{/if}}">
         <div class="comment">
             <div class="comment-content">
                 <p>
-                    <span class="author">{{author}}</span>
+                    <span class="author">{{comment.author}}</span>
                     <span class="date">  on {{submittedText}}</span>
                 </p>
-                <p class="text">{{body}}</p>
+                <p class="text">{{comment.body}}</p>
             </div>
-            <a href="{{pathFor 'commentChain'}}" class="objections btn btn-default">Objections</a>
+            <a href="{{#if hasChildren}} {{commentChainPath}} {{/if}}" class="objections btn btn-default">Objections</a>
         </div>
     </li>
 </template>

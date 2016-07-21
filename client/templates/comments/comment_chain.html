@@ -3,12 +3,22 @@
     <div class="mainContext">
         <div class="leftContext">
             <div class="comments">
-                {{> commentItem}}
+                {{#each com in commentList}}
+                    {{> commentItem (commentArgs com 'left')}}
+                {{/each}}
+                {{#each child in childComments}}
+                    {{> commentItem (commentArgs child 'left')}}
+                {{/each}}
             </div>
         </div>
         <div class="rightContext">
             <ul class="comments">
-                {{#each childComments }} {{> commentItem}} {{/each}}
+                {{#each com in commentList}}
+                    {{> commentItem (commentArgs com 'right')}}
+                {{/each}}
+                {{#each child in childComments}}
+                    {{> commentItem (commentArgs child 'right')}}
+                {{/each}}
             </ul>
         </div>
     </div>
