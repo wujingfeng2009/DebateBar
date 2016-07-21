@@ -24,7 +24,13 @@ Meteor.publish('singleComment', function(commentId) {
 
 Meteor.publish('commentChain', function(commentId) {
     check(commentId, String);
-    return Comments.find({ chainHeadId: commentId });
+    var comment = Comments.findOne(commentId);
+    if (!comment) {
+        console.log('can not find comment from comment Id: ' + commentId + '!');
+        return null;
+    }
+    console.log('comment parent post Id: ' + comment.postId + '!');
+    return Comments.find({ postId: comment.postId});
 });
 
 Meteor.publish('commentParentPost', function(commentId) {

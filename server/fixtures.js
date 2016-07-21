@@ -22,42 +22,147 @@ if (Posts.find().count() === 0) {
         votes: 0
     });
 
-    var telescopeCommentId = Comments.insert({
+    var telescopeComHeadId = Comments.insert({
         chainHeadId: '',
         parentId: '',
         postId: telescopeId,
+        side: 0,
         userId: tom._id,
         author: tom.profile.name,
         submitted: new Date(now - 5 * 3600 * 1000),
         body: 'Interesting project Sacha, can I get involved?'
     });
 
-    Comments.insert({
-        chainHeadId: telescopeCommentId,
-        parentId: telescopeCommentId,
+    var telescopeComId1_1 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComHeadId,
         postId: telescopeId,
+        side: 1,
         userId: sacha._id,
         author: sacha.profile.name,
         submitted: new Date(now - 3 * 3600 * 1000),
         body: 'sure! you can get involved at anytime!'
     });
 
-    Comments.insert({
-        chainHeadId: telescopeCommentId,
-        parentId: telescopeCommentId,
+    var telescopeComId1_2 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComHeadId,
         postId: telescopeId,
+        side: 1,
         userId: sacha._id,
         author: sacha.profile.name,
         submitted: new Date(now - 3 * 3600 * 1000),
         body: 'if you are interested in this project, you can visit our website and learn more!'
     });
 
-    Comments.insert({
+    var telescopeComId1_3 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComHeadId,
         postId: telescopeId,
+        side: 1,
         userId: sacha._id,
         author: sacha.profile.name,
         submitted: new Date(now - 3 * 3600 * 1000),
         body: 'You sure can Tom!'
+    });
+
+    var telescopeComId1_1_1 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_1,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'are you sure? at anytime!'
+    });
+
+    var telescopeComId1_1_2 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_1,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'but i can not get involed right now!'
+    });
+
+    var telescopeComId1_1_3 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_1,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'me to! can not get involved!'
+    });
+
+    var telescopeComId1_2_1 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'yes, I am interested!'
+    });
+
+    var telescopeComId1_2_2 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'I am interested, too, but I can not access your website!'
+    });
+
+    var telescopeComId1_2_3 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2,
+        postId: telescopeId,
+        side: 0,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'can you givet me the website address?'
+    });
+
+    var telescopeComId1_2_1_1 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2_1,
+        postId: telescopeId,
+        side: 1,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'get interested is not enough!'
+    });
+
+    var telescopeComId1_2_1_2 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2_1,
+        postId: telescopeId,
+        side: 1,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'you should dig deep!'
+    });
+
+    var telescopeComId1_2_1_3 = Comments.insert({
+        chainHeadId: telescopeComHeadId,
+        parentId: telescopeComId1_2_1,
+        postId: telescopeId,
+        side: 1,
+        userId: sacha._id,
+        author: sacha.profile.name,
+        submitted: new Date(now - 3 * 3600 * 1000),
+        body: 'and turn your interest to action!'
     });
 
     Posts.insert({
