@@ -27,22 +27,27 @@ body {
     width: 100%;
 }
 
+/* for header templates */
 .navbar {
     margin-bottom: 10px;
     background: #FFBBFF;
     border-color:#FFBBFF #FFBBFF #FFBBFF #FFBBFF;
 }
 
-/* line 32, ../sass/style.scss */
-
 .navbar .navbar-inner {
     border-radius: 0px 0px 3px 3px;
 }
 
+#navigation .navbar-nav .activeRoute {
+    background: #FFB5C5;
+}
+
+/* for inner spinner template */
 #spinner {
     height: 300px;
 }
 
+/* for post templates */
 .post {
     /* For modern browsers */
     /* For IE 6/7 (trigger hasLayout) */
@@ -50,6 +55,15 @@ body {
     position: relative;
     opacity: 1;
     background: #FFB5C5;
+    /* for all sides */
+    border-radius: 3em;
+    /* for specified corners */
+    border-bottom-left-radius:1.2em;
+    border-bottom-right-radius:1.2em;
+    -webkit-border-bottom-left-radius:1.2em;
+    -webkit-border-bottom-right-radius:1.2em;
+    -moz-border-bottom-left-radius:1.2em;
+    -moz-border-bottom-right-radius:1.2em;
 }
 
 .post:before,
@@ -81,9 +95,15 @@ body {
 }
 
 .post .upvote {
-    display: block;
-    margin: 7px 12px 0 0;
+    display: inline-block;  
+    margin: 1px 12px 0 0;
     float: left;
+    border-radius: 2.5em;
+    background: #EE2C2C ;
+    border-color:#EE2C2C #EE2C2C #EE2C2C #EE2C2C;
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
 }
 
 .post .post-content {
@@ -125,7 +145,9 @@ body {
     background: #EE6363;
     border-color:#EE6363 #EE6363 #EE6363 #EE6363;
 }
-/* devided a div to left and right columns */
+
+/* for comments templates */
+/* devided comments to left and right columns */
 .mainContext {
     padding: 0;
     margin: 0;
@@ -134,16 +156,15 @@ body {
 
 .mainContext .leftContext {
     float: left;
-    width: 49.5%;
-    padding-right: 1%;
+    width: 49%;
+    padding-right: 2px;
 }
 
 .mainContext .rightContext {
     float: right;
-    width: 49.5%;
-    padding-left: 1%;
+    width: 49%;
 }
-/* comments styles */
+/* comments */
 .comments {
     list-style-type: none;
     margin: 0;
@@ -151,7 +172,9 @@ body {
 
 .comments li {
     padding-top: 0;
+    /* for all sides */
     border-radius: 4em;
+    /* for specified corners */
     border-top-right-radius:1.2em;
     border-bottom-left-radius:1.2em;
     border-bottom-right-radius:1.2em;
@@ -170,13 +193,18 @@ body {
 
 .rightContext li {
     padding-top: 0;
+    /* for all sides */
     border-radius: 4em;
+    /* for specified corners */
     border-top-left-radius:1.2em;
     border-bottom-left-radius:1.2em;
     border-bottom-right-radius:1.2em;
     -webkit-border-top-left-radius:1.2em;
     -webkit-border-bottom-left-radius:1.2em;
     -webkit-border-bottom-right-radius:1.2em;
+    -moz-border-top-left-radius:1.2em;
+    -moz-border-bottom-left-radius:1.2em;
+    -moz-border-bottom-right-radius:1.2em;
     background-color: #FFE1FF;
 }
 
@@ -196,6 +224,7 @@ body {
 .rightContext .comment .comment-content {
     padding: 0;
     float: right;
+    margin-top: 1px;
     margin-right: 25px;
 }
 
@@ -225,7 +254,7 @@ body {
 }
 
 .comment .comment-content .date {
-    font-size: 6px;
+    font-size: 10px;
     font-weight: normal;
     color: gray;
 }
@@ -240,31 +269,32 @@ body {
     margin-bottom: 0;
 }
 
+/* arrows between two columns */
 .comments li .leftArrow {
     display: inline-block;
     float: left;
     position:relative;
-    top: 5px;
-    left:-45px; /* 角的位置需要细心调试 */
+    top: 3px;
+    left:-38px; /* 角的位置需要细心调试 */
     width:0;
     height:0;
     border:solid;
-    border-width: 8px 30px 8px 0px;
-    border-color:#9370DB #9400D3 #9370DB #9370DB;
+    border-width: 8px 25px 8px 0px;
+    border-color: rgba(0, 0, 0, 0) rgba(148,0,211, 0.6) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
 }
 
 .comments li .rightArrow {
     display: inline-block;
     float: right;
     position:relative;
-    top:5px;
-    right:-45px; /* 角的位置需要细心调试 */
+    top:3px;
+    right:-38px; /* 角的位置需要细心调试 */
     width:0;
     height:0;
     font-size:0;
     border:solid;
-    border-width: 8px 0px 8px 30px;
-    border-color:#9370DB #9370DB #9370DB #9400D3;
+    border-width: 8px 0px 8px 25px;
+    border-color: rgba(0, 0, 0, 0)  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(148,0,211, 0.6);
 }
 
 .comments li .comment:before,
@@ -277,6 +307,9 @@ body {
     clear: both;
 }
 
+/* to hide comments which appear on the wrong column,
+we do this to hide the comment while hold its place, so that
+simulate a chatroom scienario.  */
 .visibleDisallowed {
     visibility: hidden;
 }
@@ -292,12 +325,21 @@ body {
 
 .load-more {
     display: block;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.2);
     text-align: center;
     height: 60px;
     line-height: 60px;
     margin-bottom: 10px;
+    font-size:20px;
+    /* for all sides */
+    border-radius: 3em;
+    /* for specified corners */
+    border-top-left-radius:1.2em;
+    border-top-right-radius:1.2em;
+    -webkit-border-top-left-radius:1.2em;
+    -webkit-border-top-right-radius:1.2em;
+    -moz-border-top-left-radius:1.2em;
+    -moz-border-top-right-radius:1.2em;
 }
 
 .load-more:hover {

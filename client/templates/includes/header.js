@@ -7,6 +7,6 @@ Template.header.helpers({
       return Router.current() && Router.current().route.getName() === name
     });
 
-    return active && 'active';
+    return active && 'activeRoute';
   }
 });
