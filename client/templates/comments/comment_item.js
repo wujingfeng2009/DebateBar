@@ -18,15 +18,21 @@ Template.commentItem.helpers({
     hasChildren: function() {
         return Comments.find({ parentId: this.comment._id }).count() && true;
     },
-    alignSide: function() {
+    arrowDirection: function() {
         if (this.align === 'left')
-            return 'right';
+            return 'rightArrow';
         if (this.align === 'right')
-            return 'left';
-        if (this.align === 'right')
-            return '';
+            return 'leftArrow';
+        return '';
     },
     arrowNeeded: function() {
             return this.needArrow;
+    },
+    columnSide: function() {
+        if (this.align === 'left')
+            return 'leftColumn';
+        if (this.align === 'right')
+            return 'rightColumn';
+        return '';
     }
 });

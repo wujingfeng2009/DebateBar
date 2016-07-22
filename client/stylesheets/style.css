@@ -4,16 +4,16 @@
 .comments li,
 .comment-form {
     background: #fff;
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
 }
 
 body {
-    background: #eee;
+    background: #9370DB;
     color: #666666;
 }
 
@@ -29,8 +29,9 @@ body {
 
 .navbar {
     margin-bottom: 10px;
+    background: #FFBBFF;
+    border-color:#FFBBFF #FFBBFF #FFBBFF #FFBBFF;
 }
-
 
 /* line 32, ../sass/style.scss */
 
@@ -48,6 +49,7 @@ body {
     *zoom: 1;
     position: relative;
     opacity: 1;
+    background: #FFB5C5;
 }
 
 .post:before,
@@ -86,6 +88,7 @@ body {
 
 .post .post-content {
     float: left;
+    display: inline-block;
 }
 
 .post .post-content h3 {
@@ -115,28 +118,32 @@ body {
 }
 
 .post .discuss {
-    display: block;
+    display: inline-block;
     float: right;
     margin-top: 10px;
+    border-radius: 2.5em;
+    background: #EE6363;
+    border-color:#EE6363 #EE6363 #EE6363 #EE6363;
 }
-
+/* devided a div to left and right columns */
 .mainContext {
-    position: relative;
     padding: 0;
     margin: 0;
     background-color: yellow;
 }
 
-.leftContext {
+.mainContext .leftContext {
     float: left;
-    width: 50%;
+    width: 49.5%;
+    padding-right: 1%;
 }
 
-.rightContext {
+.mainContext .rightContext {
     float: right;
-    width: 50%;
+    width: 49.5%;
+    padding-left: 1%;
 }
-
+/* comments styles */
 .comments {
     list-style-type: none;
     margin: 0;
@@ -144,22 +151,72 @@ body {
 
 .comments li {
     padding-top: 0;
+    border-radius: 4em;
+    border-top-right-radius:1.2em;
+    border-bottom-left-radius:1.2em;
+    border-bottom-right-radius:1.2em;
+    -webkit-border-top-right-radius:1.2em;
+    -webkit-border-bottom-left-radius:1.2em;
+    -webkit-border-bottom-right-radius:1.2em;
+    -moz-border-top-right-radius:1.2em;
+    -moz-border-bottom-left-radius:1.2em;
+    -moz-border-bottom-right-radius:1.2em;
+    background-color: #D1EEEE;
 }
 
-.comments li .comment:before,
-.comments li .comment:after {
-    content: "";
-    display: table;
+ .leftContext li {
+    /* use default styles for now */
 }
 
-.comments li .comment:after {
-    clear: both;
+.rightContext li {
+    padding-top: 0;
+    border-radius: 4em;
+    border-top-left-radius:1.2em;
+    border-bottom-left-radius:1.2em;
+    border-bottom-right-radius:1.2em;
+    -webkit-border-top-left-radius:1.2em;
+    -webkit-border-bottom-left-radius:1.2em;
+    -webkit-border-bottom-right-radius:1.2em;
+    background-color: #FFE1FF;
 }
 
 .comment .comment-content {
-    float: left;
+    display: inline-block;
     margin: 0;
     padding-top: 0;
+    float: left;
+    margin-top: 5px;
+    margin-left: 25px;
+}
+
+.leftContext .comment .comment-content {
+    /* use default styles for now */
+}
+
+.rightContext .comment .comment-content {
+    padding: 0;
+    float: right;
+    margin-right: 25px;
+}
+
+.comment .objections {
+    margin-top: 20px;
+    font-size: 12px;
+    display: inline-block;
+    float: right;
+    border-radius: 4em;
+    background: #8DB6CD ;
+    border-color:#8DB6CD #8DB6CD #8DB6CD #8DB6CD;
+}
+
+.leftContext .comment .objections {
+    /* use default styles for now */
+}
+
+.rightContext .comment .objections {
+    float: left;
+    background: #EEB4B4 ;
+    border-color:#EEB4B4 #EEB4B4 #EEB4B4 #EEB4B4;
 }
 
 .comment .comment-content .author {
@@ -179,58 +236,49 @@ body {
     padding-top: 0;
 }
 
-.comment .objections {
-    margin-top: 20px;
-    font-size: 12px;
-    display: block;
-    float: right;
-}
-
 .comments li p:last-child {
     margin-bottom: 0;
 }
 
+.comments li .leftArrow {
+    display: inline-block;
+    float: left;
+    position:relative;
+    top: 5px;
+    left:-45px; /* 角的位置需要细心调试 */
+    width:0;
+    height:0;
+    border:solid;
+    border-width: 8px 30px 8px 0px;
+    border-color:#9370DB #9400D3 #9370DB #9370DB;
+}
+
+.comments li .rightArrow {
+    display: inline-block;
+    float: right;
+    position:relative;
+    top:5px;
+    right:-45px; /* 角的位置需要细心调试 */
+    width:0;
+    height:0;
+    font-size:0;
+    border:solid;
+    border-width: 8px 0px 8px 30px;
+    border-color:#9370DB #9370DB #9370DB #9400D3;
+}
+
+.comments li .comment:before,
+.comments li .comment:after {
+    content: "";
+    display: table;
+}
+
+.comments li .comment:after {
+    clear: both;
+}
+
 .visibleDisallowed {
     visibility: hidden;
-}
-
-.send {
-/*
-position:relative;
-width:150px;
-height:35px;
-margin:30px auto 0;
-*/
-background:#F8C301;
-border-radius:30px; /* 圆角 */
-}
-
-.send .rightArrow {
-display: block;
-float: right;
-position:relative;
-top:5px;
-right:-65px; /* 圆角的位置需要细心调试哦 */
-width:0;
-height:0;
-font-size:0;
-border:solid;
-border-width: 8px 22px 8px 22px;
-border-color:#eee #eee #eee purple;
-}
-
-.send .leftArrow {
-display: block;
-float: left;
-position:relative;
-top: 5px;
-left:-65px; /* 圆角的位置需要细心调试哦 */
-width:0;
-height:0;
-font-size:0;
-border:solid;
-border-width: 8px 22px 8px 22px;
-border-color:#eee purple #eee #eee;
 }
 
 .dropdown-menu span {
