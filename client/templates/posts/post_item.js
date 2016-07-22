@@ -8,6 +8,9 @@ Template.postItem.helpers({
         //console.log('post_item: { href: ' + a.href + ', hostname: ' + a.hostname + '}');
         return a.hostname;
     },
+    commentsCount: function() {
+        return this.commentsCount;
+    },
     upvotedClass: function() {
         var userId = Meteor.userId();
         if (userId && !_.include(this.upvoters, userId)) {

@@ -22,9 +22,20 @@ if (Posts.find().count() === 0) {
         votes: 0
     });
 
+    Comments.insert({
+        chainHeadId: '',
+        parentId: '',
+        postId: telescopeId,
+        side: 0,
+        userId: tom._id,
+        author: tom.profile.name,
+        submitted: new Date(now - 5 * 3600 * 1000),
+        body: 'What is Telescope?'
+    });
+
     var telescopeComHeadId = Comments.insert({
         chainHeadId: '',
-        parentId: null,
+        parentId: '',
         postId: telescopeId,
         side: 0,
         userId: tom._id,
