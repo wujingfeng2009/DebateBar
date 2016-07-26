@@ -16,7 +16,8 @@ Template.commentItem.helpers({
         return Router.routes.commentChain.path({ _id: this.comment._id});
     },
     childCount: function() {
-        return Comments.find({ parentId: this.comment._id }).count();
+        //return Comments.find({ parentId: this.comment._id }).count();
+        return this.comment.childTotal;
     },
     arrowDirection: function() {
         if (this.column === 'left')
