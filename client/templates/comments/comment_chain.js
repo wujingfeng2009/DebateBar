@@ -1,18 +1,14 @@
 Template.commentChain.helpers({
-    commentArgs: function(comment, align, needArrow) {
-        console.log('comment[: ' + comment._id + '] align: ' + align + 'need arrow: ' + needArrow);
+    commentArgs: function(comment, column, needArrow) {
+        console.log('comment[: ' + comment._id + '] column: ' + column + 'need arrow: ' + needArrow);
         return {
             comment,
-            align: align,
+            column: column,
             needArrow: needArrow,
         };
     },
-    childComments: function() {
-        console.log('parent comment Id: ' + this._id + '!');
-        return Comments.find({ parentId: this._id });
-    },
-    shouldSubmitComment: function(column) {
-        var children = Comments.find({ parentId: this._id });
+    needCommentChainSubmit: function(column) {
+        var children = Comments.find({ parentId: this.chainComment._id });
         var columnHasChildren = false;
         children.forEach(function (child) {
             console.log('column: ' + column + ', child side: ' + child.side);
@@ -21,15 +17,19 @@ Template.commentChain.helpers({
             }
         });
 
-        if (Meteor.user() && columnHasChildren)
+        if (Meteor.user() && (columnHasChildren === true || column !== this.chainComment.side) )
             return true;
         return false;
     },
+    childComments: function() {
+        console.log('parent comment Id: ' + this.chainComment._id + '!');
+        return Comments.find({ parentId: this.chainComment._id });
+    },
     commentList: function() {
         var context = new Array();
-        console.log('push self: ' + this._id + ', parent: ' + this.parentId);
-        context.push(this);
-        var parent = Comments.findOne(this.parentId);
+        console.log('push self: ' + this.chainComment._id + ', parent: ' + this.chainComment.parentId);
+        context.push(this.chainComment);
+        var parent = Comments.findOne(this.chainComment.parentId);
 
         while (parent) {
             console.log('push parent: ' + parent._id  + ', grandparent: ' + parent.parentId);
@@ -41,6 +41,6 @@ Template.commentChain.helpers({
         return context;
     },
     parentPost: function() {
-        return Posts.findOne(this.postId);
+        return Posts.findOne(this.chainComment.postId);
     }
 });

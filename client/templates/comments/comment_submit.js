@@ -8,9 +8,6 @@ Template.commentSubmit.helpers({
     },
     errorClass: function(field) {
         return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
-    },
-    forCommentChain: function() {
-        return this.commentChain;
     }
 });
 
@@ -21,7 +18,10 @@ Template.commentSubmit.events({
         var $body = $(e.target).find('[name=body]');
         var comment = {
             body: $body.val(),
-            postId: template.data._id
+            chainHeadId: '',
+            parentId: '',
+            postId: template.data._id,
+            side: 0,
         };
 
         var errors = {};

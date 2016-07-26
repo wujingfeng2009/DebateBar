@@ -3,12 +3,12 @@ Template.commentItem.helpers({
         return this.comment.submitted.toString();
     },
     visibleDisallowed: function() {
-        console.log('align: ' + this.align + ', side: ' + this.comment.side);
-        if (this.align === 'none')
+        console.log('column: ' + this.column + ', side: ' + this.comment.side);
+        if (this.column === 'none')
             return false;
-        if (this.align === 'left' && this.comment.side === 0)
+        if (this.column === 'left' && this.comment.side === 0)
             return false ;
-        if (this.align === 'right' && this.comment.side === 1)
+        if (this.column === 'right' && this.comment.side === 1)
             return false ;
         return true;
     },
@@ -19,19 +19,19 @@ Template.commentItem.helpers({
         return Comments.find({ parentId: this.comment._id }).count() && true;
     },
     arrowDirection: function() {
-        if (this.align === 'left')
+        if (this.column === 'left')
             return 'rightArrow';
-        if (this.align === 'right')
+        if (this.column === 'right')
             return 'leftArrow';
         return '';
     },
     arrowNeeded: function() {
-            return this.needArrow;
+            return this.needArrow &&Comments.find({ parentId: this.comment._id }).count() && true;
     },
     columnSide: function() {
-        if (this.align === 'left')
+        if (this.column === 'left')
             return 'leftColumn';
-        if (this.align === 'right')
+        if (this.column === 'right')
             return 'rightColumn';
         return '';
     }

@@ -1,9 +1,9 @@
 Template.postPage.helpers({
-    commentArgs: function(comment, align, needArrow) {
-        console.log('comment[: ' + comment._id + '] align: ' + align + 'need arrow: ' + needArrow);
+    commentArgs: function(comment, column, needArrow) {
+        console.log('comment[: ' + comment._id + '] column: ' + column + 'need arrow: ' + needArrow);
         return {
             comment,
-            align: align,
+            column: column,
             needArrow: needArrow,
         };
     },

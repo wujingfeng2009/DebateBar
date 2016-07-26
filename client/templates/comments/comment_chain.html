@@ -10,8 +10,8 @@
                     {{> commentItem (commentArgs child 'left' false)}}
                 {{/if}}
             {{/each}}
-            {{#if shouldSubmitComment 0}}
-                {{> commentSubmit  commentChain=1 }}
+            {{#if needCommentChainSubmit 0}}
+                {{> commentChainSubmit chainCom=chainComment sameside=false }}
             {{/if}}
         </div>
         <div class="comments rightContext">
@@ -23,8 +23,8 @@
                     {{> commentItem (commentArgs child 'right' false)}}
                 {{/if}}
             {{/each}}
-            {{#if shouldSubmitComment 1}}
-                {{> commentSubmit  commentChain=1 }}
+            {{#if needCommentChainSubmit 1}}
+                {{> commentChainSubmit chainCom=chainComment sameside=false }}
             {{/if}}
         </div>
     </div>
