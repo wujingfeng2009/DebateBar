@@ -17,13 +17,13 @@ Template.commentChain.helpers({
             }
         });
 
-        if (Meteor.user() && (columnHasChildren === true || column !== this.chainComment.side) )
+        if (Meteor.user() && (columnHasChildren || column !== this.chainComment.side) )
             return true;
         return false;
     },
     childComments: function() {
         console.log('parent comment Id: ' + this.chainComment._id + '!');
-        return Comments.find({ parentId: this.chainComment._id });
+        return Comments.find({ parentId: this.chainComment._id }, {sort: { childCount: -1, submitted: -1 }});
     },
     commentList: function() {
         var context = new Array();
