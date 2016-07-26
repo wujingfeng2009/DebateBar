@@ -11,6 +11,20 @@ Template.commentChain.helpers({
         console.log('parent comment Id: ' + this._id + '!');
         return Comments.find({ parentId: this._id });
     },
+    shouldSubmitComment: function(column) {
+        var children = Comments.find({ parentId: this._id });
+        var columnHasChildren = false;
+        children.forEach(function (child) {
+            console.log('column: ' + column + ', child side: ' + child.side);
+            if (child.side === column) {
+                columnHasChildren = true;
+            }
+        });
+
+        if (Meteor.user() && columnHasChildren)
+            return true;
+        return false;
+    },
     commentList: function() {
         var context = new Array();
         console.log('push self: ' + this._id + ', parent: ' + this.parentId);

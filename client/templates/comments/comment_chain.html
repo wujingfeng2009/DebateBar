@@ -10,6 +10,9 @@
                     {{> commentItem (commentArgs child 'left' false)}}
                 {{/if}}
             {{/each}}
+            {{#if shouldSubmitComment 0}}
+                {{> commentSubmit  commentChain=1 }}
+            {{/if}}
         </div>
         <div class="comments rightContext">
             {{#each com in commentList}}
@@ -20,6 +23,9 @@
                     {{> commentItem (commentArgs child 'right' false)}}
                 {{/if}}
             {{/each}}
+            {{#if shouldSubmitComment 1}}
+                {{> commentSubmit  commentChain=1 }}
+            {{/if}}
         </div>
     </div>
 </template>

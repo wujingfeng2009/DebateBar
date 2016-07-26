@@ -5,7 +5,7 @@
         {{> commentItem (commentArgs comment 'none' false)}}
     {{/each}}
     </ul>
-    {{#if currentUser}} {{> commentSubmit}} {{else}}
+    {{#if currentUser}} {{> commentSubmit commentChain=0 }} {{else}}
     <p>Please log in to leave a comment.</p>
     {{/if}}
 </template>

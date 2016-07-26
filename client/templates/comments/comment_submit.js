@@ -8,6 +8,9 @@ Template.commentSubmit.helpers({
     },
     errorClass: function(field) {
         return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
+    },
+    forCommentChain: function() {
+        return this.commentChain;
     }
 });
 
