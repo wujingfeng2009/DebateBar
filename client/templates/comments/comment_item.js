@@ -13,6 +13,16 @@ Template.commentItem.helpers({
         return true;
     },
     commentChainPath: function() {
+        var lastChainCommentId = Session.get('lastChainCommentId');
+        console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
+        if (this.comment._id === lastChainCommentId) {
+            if (this.comment.parentId !== '')
+                return Router.routes.commentChain.path({ _id: this.comment.parentId});
+            else {
+                return Router.routes.postPage.path({ _id: this.comment.postId});
+            }
+        }
+
         return Router.routes.commentChain.path({ _id: this.comment._id});
     },
     childCount: function() {

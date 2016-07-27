@@ -29,6 +29,7 @@ Template.commentChain.helpers({
         var context = new Array();
         console.log('push self: ' + this.chainComment._id + ', parent: ' + this.chainComment.parentId);
         context.push(this.chainComment);
+        Session.set('lastChainCommentId', this.chainComment._id);
         var parent = Comments.findOne(this.chainComment.parentId);
 
         while (parent) {

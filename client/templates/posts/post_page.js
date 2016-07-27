@@ -8,6 +8,7 @@ Template.postPage.helpers({
         };
     },
     comments: function() {
+        Session.set('lastChainCommentId', '');
         return Comments.find({ postId: this._id, parentId: '' });
     }
 });
