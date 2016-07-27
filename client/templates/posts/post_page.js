@@ -1,6 +1,6 @@
 Template.postPage.helpers({
     commentArgs: function(comment, column, needArrow) {
-        console.log('comment[: ' + comment._id + '] column: ' + column + 'need arrow: ' + needArrow);
+        //console.log('comment[: ' + comment._id + '] column: ' + column + 'need arrow: ' + needArrow);
         return {
             comment,
             column: column,

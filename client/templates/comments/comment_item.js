@@ -3,7 +3,7 @@ Template.commentItem.helpers({
         return this.comment.submitted.toString();
     },
     visibleDisallowed: function() {
-        console.log('column: ' + this.column + ', side: ' + this.comment.side);
+        //console.log('column: ' + this.column + ', side: ' + this.comment.side);
         if (this.column === 'none')
             return false;
         if (this.column === 'left' && this.comment.side === 0)
@@ -14,7 +14,7 @@ Template.commentItem.helpers({
     },
     commentChainPath: function() {
         var lastChainCommentId = Session.get('lastChainCommentId');
-        console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
+        //console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
         if (this.comment._id === lastChainCommentId) {
             if (this.comment.parentId !== '')
                 return Router.routes.commentChain.path({ _id: this.comment.parentId});
@@ -37,7 +37,7 @@ Template.commentItem.helpers({
         return '';
     },
     arrowNeeded: function() {
-            return this.needArrow &&Comments.find({ parentId: this.comment._id }).count() && true;
+        return this.needArrow  && this.comment.needArrow;
     },
     columnSide: function() {
         if (this.column === 'left')
