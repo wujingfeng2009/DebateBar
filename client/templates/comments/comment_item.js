@@ -17,7 +17,7 @@ Template.commentItem.helpers({
     },
     childCount: function() {
         //return Comments.find({ parentId: this.comment._id }).count();
-        return this.comment.childTotal;
+        return this.comment.childCount;
     },
     arrowDirection: function() {
         if (this.column === 'left')

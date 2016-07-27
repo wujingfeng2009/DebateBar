@@ -23,7 +23,7 @@ Template.commentChain.helpers({
     },
     childComments: function() {
         console.log('parent comment Id: ' + this.chainComment._id + '!');
-        return Comments.find({ parentId: this.chainComment._id }, {sort: { childCount: -1, submitted: -1 }});
+        return Comments.find({ parentId: this.chainComment._id }, {sort: { childTotal: -1, submitted: -1 }});
     },
     commentList: function() {
         var context = new Array();
