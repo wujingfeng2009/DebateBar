@@ -218,7 +218,6 @@ body {
     display: block;
     margin: 0;
     padding-top: 0;
-    float: left;
     margin-top: 5px;
     margin-left: 25px;
     text-decoration: none;
@@ -230,7 +229,6 @@ body {
 
 .rightContext .comment .comment-content {
     padding: 0;
-    float: right;
     margin-top: 1px;
     margin-right: 25px;
 }
