@@ -12,6 +12,11 @@
     box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
 }
 
+.comment-form {
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
 body {
     background: #9370DB;
     color: #666666;

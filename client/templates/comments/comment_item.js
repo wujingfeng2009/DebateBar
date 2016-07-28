@@ -29,6 +29,9 @@ Template.commentItem.helpers({
         //return Comments.find({ parentId: this.comment._id }).count();
         return this.comment.childCount;
     },
+    childTotalCount: function() {
+        return this.comment.childTotal;
+    },
     arrowDirection: function() {
         if (this.column === 'left')
             return 'rightArrow';
