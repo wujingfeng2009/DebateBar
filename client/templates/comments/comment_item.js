@@ -14,8 +14,9 @@ Template.commentItem.helpers({
     },
     commentChainPath: function() {
         var lastChainCommentId = Session.get('lastChainCommentId');
+        var lastThreadCommentId = Session.get('lastThreadCommentId');
         //console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
-        if (this.comment._id === lastChainCommentId) {
+        if (lastThreadCommentId) {
             if (this.comment.parentId !== '')
                 return Router.routes.commentChain.path({ _id: this.comment.parentId});
             else {
@@ -23,7 +24,11 @@ Template.commentItem.helpers({
             }
         }
 
-        return Router.routes.commentChain.path({ _id: this.comment._id});
+        if (lastChainCommentId) {
+            return Router.routes.commentThread.path({ _id: this.comment._id});
+        }
+
+        return Router.routes.commentThread.path({ _id: this.comment._id});
     },
     childCount: function() {
         //return Comments.find({ parentId: this.comment._id }).count();

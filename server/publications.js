@@ -22,7 +22,7 @@ Meteor.publish('singleComment', function(commentId) {
     return Comments.find(commentId);
 });
 
-Meteor.publish('commentChain', function(commentId) {
+Meteor.publish('commentsTree', function(commentId) {
     check(commentId, String);
     var comment = Comments.findOne(commentId);
     if (!comment) {
