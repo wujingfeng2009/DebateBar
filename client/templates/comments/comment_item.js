@@ -13,9 +13,21 @@ Template.commentItem.helpers({
         return true;
     },
     commentChainPath: function() {
+        var commentThreadMode = Session.get('commentThreadMode');
+
         var lastChainCommentId = Session.get('lastChainCommentId');
         var lastThreadCommentId = Session.get('lastThreadCommentId');
         //console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
+        if (!commentThreadMode) {
+            if (lastChainCommentId === this.comment._id) {
+                if (this.comment.parentId !== '')
+                    return Router.routes.commentChain.path({ _id: this.comment.parentId});
+                else
+                    return Router.routes.postPage.path({ _id: this.comment.postId});
+            }
+            return Router.routes.commentChain.path({ _id: this.comment._id});
+        }
+
         if (lastThreadCommentId) {
             if (this.comment.parentId !== '')
                 return Router.routes.commentChain.path({ _id: this.comment.parentId});
