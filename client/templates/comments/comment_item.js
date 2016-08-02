@@ -59,11 +59,14 @@ Template.commentItem.helpers({
     arrowNeeded: function() {
         return this.needArrow  && this.comment.needArrow;
     },
-    columnSide: function() {
-        if (this.column === 'left')
-            return 'leftColumn';
-        if (this.column === 'right')
-            return 'rightColumn';
+    alignSide: function() {
+        if (this.comment.side === 0)
+            return 'alignLeft';
+        if (this.comment.side === 1)
+            return 'alignRight';
         return '';
+    },
+    oneColumnMode: function() {
+        return Session.get('oneColumnMode');
     }
 });

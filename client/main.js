@@ -12,6 +12,8 @@ Meteor.startup(function() {
         //console.log('There are fucking ' + Posts.find().count() + ' posts');
         console.log('enableing  commentThreadMode!');
         Session.set('commentThreadMode', false);
-        Session.set('animationMode', true);
+        Session.set('animationMode', false);
+        Session.set('showSiblingsMode', true);
+        Session.set('oneColumnMode', false);
     });
 });

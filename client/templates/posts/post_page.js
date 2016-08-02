@@ -11,5 +11,8 @@ Template.postPage.helpers({
         Session.set('lastChainCommentId', '');
         Session.set('lastThreadCommentId', '');
         return Comments.find({ postId: this._id, parentId: '' });
+    },
+    oneColumnMode: function() {
+        return Session.get('oneColumnMode');
     }
 });

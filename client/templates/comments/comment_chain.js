@@ -30,34 +30,37 @@ Template.commentChain.helpers({
         Session.set('lastChainCommentId', this.chainComment._id);
         Session.set('lastThreadCommentId', '');
 
+        var showSiblingsMode = Session.get('showSiblingsMode');
         var parent = Comments.findOne(this.chainComment._id);
         while (parent) {
-            console.log('push parent[' + parent._id + ']: ' + parent.body);
+            //console.log('push parent[' + parent._id + ']: ' + parent.body);
             parent.needArrow = true; // for arrows
             context.push(parent);
             if (parent.parentId === '')
                 break;
 
-            var siblingsArray = Comments.find({ parentId: parent.parentId }, {sort: { childTotal: -1, submitted: -1} }).fetch();
-            if (siblingsArray && siblingsArray.length > 0) {
-                console.log("siblingsArray lenght: " + siblingsArray.length);
-                var parentIndex = siblingsArray.findIndex( function (sibling, index, array) {
-                    if (sibling._id === parent._id) {
-                        console.log("found parent in siblingsArray[" + index + "]: " + sibling.body);
-                        return true;
-                    }
-                    return false;
-                });
-                console.log("remove siblings from parentIndex[" + parentIndex + "] on.");
-                siblingsArray.splice(parentIndex);
-                console.log("now siblingsArray lenght: " + siblingsArray.length);
-            }
+            if (showSiblingsMode) {
+                var siblingsArray = Comments.find({ parentId: parent.parentId }, {sort: { childTotal: -1, submitted: -1} }).fetch();
+                if (siblingsArray && siblingsArray.length > 0) {
+                    //console.log("siblingsArray lenght: " + siblingsArray.length);
+                    var parentIndex = siblingsArray.findIndex( function (sibling, index, array) {
+                        if (sibling._id === parent._id) {
+                            //console.log("found parent in siblingsArray[" + index + "]: " + sibling.body);
+                            return true;
+                        }
+                        return false;
+                    });
+                    //console.log("remove siblings from parentIndex[" + parentIndex + "] on.");
+                    siblingsArray.splice(parentIndex);
+                    //console.log("now siblingsArray lenght: " + siblingsArray.length);
+                }
 
-            if (siblingsArray) {
-                siblingsArray.reverse();
-                console.log("context lenght: " + context.length);
-                context = context.concat(siblingsArray);
-                console.log("after concat siblingsArray, context lenght: " + context.length);
+                if (siblingsArray) {
+                    siblingsArray.reverse();
+                    //console.log("context lenght: " + context.length);
+                    context = context.concat(siblingsArray);
+                    //console.log("after concat siblingsArray, context lenght: " + context.length);
+                }
             }
 
             parent = Comments.findOne(parent.parentId);
@@ -68,5 +71,8 @@ Template.commentChain.helpers({
     },
     parentPost: function() {
         return Posts.findOne(this.chainComment.postId);
+    },
+    oneColumnMode: function() {
+        return Session.get('oneColumnMode');
     }
 });

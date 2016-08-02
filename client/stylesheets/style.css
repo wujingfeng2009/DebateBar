@@ -1,7 +1,7 @@
 .grid-block,
 .main,
 .post,
-.comments li,
+li .comment,
 .comment-form {
     background: #fff;
     border-radius: 5px;
@@ -10,11 +10,6 @@
     -webkit-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
     -moz-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
     box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
-}
-
-.comment-form {
-    margin: 0px;
-    margin-bottom: 10px;
 }
 
 body {
@@ -156,7 +151,6 @@ body {
 .mainContext {
     padding: 0;
     margin: 0;
-    background-color: yellow;
 }
 
 .mainContext .leftContext {
@@ -177,6 +171,20 @@ body {
 }
 
 .comments li {
+    background-color: #9370DB;
+}
+
+.comments li:before,
+.comments li:after {
+    content: "";
+    display: table;
+}
+
+.comments li:after {
+    clear: both;
+}
+
+.comments li .comment {
     padding-top: 0;
     /* for all sides */
     border-radius: 4em;
@@ -193,11 +201,26 @@ body {
     background-color: #D1EEEE;
 }
 
- .leftContext li {
+.comments li .alignLeft {
+    float: left;
+    width: 70%;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.comments li .alignRight {
+    float: right;
+    width: 70%;
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: #FFE1FF;
+}
+
+ .leftContext li .comment {
     /* use default styles for now */
 }
 
-.rightContext li {
+.rightContext li .comment {
     padding-top: 0;
     /* for all sides */
     border-radius: 4em;
@@ -212,6 +235,16 @@ body {
     -moz-border-bottom-left-radius:1.2em;
     -moz-border-bottom-right-radius:1.2em;
     background-color: #FFE1FF;
+}
+
+li .comment:before,
+li .comment:after {
+    content: "";
+    display: table;
+}
+
+li .comment:after {
+    clear: both;
 }
 
 .comment .comment-content {
@@ -312,16 +345,6 @@ body {
     border:solid;
     border-width: 8px 0px 8px 25px;
     border-color: rgba(0, 0, 0, 0)  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(148,0,211, 0.6);
-}
-
-.comments li .comment:before,
-.comments li .comment:after {
-    content: "";
-    display: table;
-}
-
-.comments li .comment:after {
-    clear: both;
 }
 
 /* to hide comments which appear on the wrong column,
