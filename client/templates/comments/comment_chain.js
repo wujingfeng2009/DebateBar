@@ -8,6 +8,8 @@ Template.commentChain.helpers({
         };
     },
     needCommentChainSubmit: function(column) {
+        if (Session.get('oneColumnMode'))
+            return true;
         var children = Comments.find({ parentId: this.chainComment._id });
         var columnHasChildren = false;
         children.forEach(function (child) {

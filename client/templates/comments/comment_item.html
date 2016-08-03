@@ -1,6 +1,6 @@
 <template name="commentItem">
     <li class="{{#if visibleDisallowed}} visibleDisallowed {{/if}}">
-        <div  class="comment {{#if oneColumnMode}} {{alignSide}} {{/if}}">
+        <div  class="comment {{oneColumnAlignSide}}">
             <a href=" {{commentChainPath}}" class="comment-content">
                 <p>
                     <span class="author">{{comment.author}}</span>

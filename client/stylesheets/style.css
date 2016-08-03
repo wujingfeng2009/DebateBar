@@ -203,14 +203,14 @@ body {
 
 .comments li .alignLeft {
     float: left;
-    width: 70%;
+    width: 80%;
     margin: 0;
     margin-bottom: 10px;
 }
 
 .comments li .alignRight {
     float: right;
-    width: 70%;
+    width: 80%;
     margin: 0;
     margin-bottom: 10px;
     background-color: #FFE1FF;

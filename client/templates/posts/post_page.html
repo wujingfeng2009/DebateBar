@@ -2,7 +2,7 @@
     {{> postItem}}
     <div class="comments">
     {{#each comment in comments}}
-        {{> commentItem (commentArgs comment 'none' false)}}
+        {{> commentItem (commentArgs comment 'post' false)}}
     {{/each}}
     </div>
     {{#if currentUser}} {{> commentSubmit }} {{else}}

@@ -4,7 +4,9 @@ Template.commentItem.helpers({
     },
     visibleDisallowed: function() {
         //console.log('column: ' + this.column + ', side: ' + this.comment.side);
-        if (this.column === 'none')
+        if (Session.get('oneColumnMode'))
+            return false;
+        if (this.column === 'none' || this.column === 'post')
             return false;
         if (this.column === 'left' && this.comment.side === 0)
             return false ;
@@ -59,14 +61,14 @@ Template.commentItem.helpers({
     arrowNeeded: function() {
         return this.needArrow  && this.comment.needArrow;
     },
-    alignSide: function() {
-        if (this.comment.side === 0)
-            return 'alignLeft';
-        if (this.comment.side === 1)
-            return 'alignRight';
+    oneColumnAlignSide: function() {
+        console.log("oneColumnMode: " + Session.get('oneColumnMode') + ", column: " + this.column);
+        if (Session.get('oneColumnMode') && this.column !== 'post') {
+            if (this.comment.side === 0)
+                return 'alignLeft';
+            if (this.comment.side === 1)
+                return 'alignRight';
+        }
         return '';
-    },
-    oneColumnMode: function() {
-        return Session.get('oneColumnMode');
     }
 });
