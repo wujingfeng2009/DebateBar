@@ -1,7 +1,7 @@
 <template name="commentChain">
     {{#with parentPost}} {{> postItem}} {{/with}}
     {{#if oneColumnMode}}
-        <div class="comments">
+        <div class="comments ">
             {{#each com in commentList}}
                 {{> commentItem (commentArgs com 'none' true)}}
             {{/each}}
@@ -16,7 +16,7 @@
         </div>
     {{else}}
         <div class="mainContext">
-            <div class="comments leftContext">
+            <div class="comments leftContext ">
                 {{#each com in commentList}}
                     {{> commentItem (commentArgs com 'left' true)}}
                 {{/each}}
@@ -29,7 +29,7 @@
                     {{> commentChainSubmit chainCom=chainComment sameside=false }}
                 {{/if}}
             </div>
-            <div class="comments rightContext">
+            <div class="comments rightContext ">
                 {{#each com in commentList}}
                     {{> commentItem (commentArgs com 'right' true)}}
                 {{/each}}

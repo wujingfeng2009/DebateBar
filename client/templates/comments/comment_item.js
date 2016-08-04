@@ -70,5 +70,16 @@ Template.commentItem.helpers({
                 return 'alignRight';
         }
         return '';
+    },
+    timeline: function() {
+        if (this.column === 'post')
+            return '';
+        if (this.comment._id === this.comment.chainHeadId)
+            return '';
+        if (this.comment.side === 0)
+            return 'timelineRight';
+        if (this.comment.side === 1)
+            return 'timelineLeft';
+        return '';
     }
 });

@@ -24,7 +24,7 @@ Template.commentChainSubmit.events({
         if (template.data.sameside) {
             comment = {
                 body: $body.val(),
-                chainHeadId: '',
+                chainHeadId: template.data.chainCom.chainHeadId,
                 parentId: template.data.chainCom._id,
                 postId: template.data.chainCom.postId,
                 side: template.data.chainCom.side,
@@ -32,7 +32,7 @@ Template.commentChainSubmit.events({
         } else {
             comment = {
                 body: $body.val(),
-                chainHeadId: '',
+                chainHeadId: template.data.chainCom.chainHeadId,
                 parentId: template.data.chainCom._id,
                 postId: template.data.chainCom.postId,
                 side: template.data.chainCom.side === 0 ? 1 : 0,
