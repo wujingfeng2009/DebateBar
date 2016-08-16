@@ -1,47 +1,12 @@
 <template name="commentChain">
     {{#with parentPost}} {{> postItem}} {{/with}}
-    {{#if oneColumnMode}}
         <div class="comments ">
-            {{#each com in commentList}}
-                {{> commentItem (commentArgs com 'none' true)}}
+            {{#each com in commentsList}}
+                {{> commentItem comment = com needAlign = true}}
             {{/each}}
             {{#each child in childComments}}
-                {{#if child.side = 0}}
-                    {{> commentItem (commentArgs child 'none' false)}}
-                {{/if}}
+                {{> commentItem comment = child needAlign = true}}
             {{/each}}
-            {{#if needCommentChainSubmit 1}}
-                {{> commentChainSubmit chainCom=chainComment sameside=false }}
-            {{/if}}
+            {{> commentChainSubmit chainCom=chainComment sameside=false }}
         </div>
-    {{else}}
-        <div class="mainContext">
-            <div class="comments leftContext ">
-                {{#each com in commentList}}
-                    {{> commentItem (commentArgs com 'left' true)}}
-                {{/each}}
-                {{#each child in childComments}}
-                    {{#if child.side = 0}}
-                        {{> commentItem (commentArgs child 'left' false)}}
-                    {{/if}}
-                {{/each}}
-                {{#if needCommentChainSubmit 0}}
-                    {{> commentChainSubmit chainCom=chainComment sameside=false }}
-                {{/if}}
-            </div>
-            <div class="comments rightContext ">
-                {{#each com in commentList}}
-                    {{> commentItem (commentArgs com 'right' true)}}
-                {{/each}}
-                {{#each child in childComments}}
-                    {{#if child.side = 1}}
-                        {{> commentItem (commentArgs child 'right' false)}}
-                    {{/if}}
-                {{/each}}
-                {{#if needCommentChainSubmit 1}}
-                    {{> commentChainSubmit chainCom=chainComment sameside=false }}
-                {{/if}}
-            </div>
-        </div>
-    {{/if}}
 </template>

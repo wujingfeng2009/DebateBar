@@ -2,18 +2,6 @@ Template.commentItem.helpers({
     submittedText: function() {
         return this.comment.submitted.toString();
     },
-    visibleDisallowed: function() {
-        //console.log('column: ' + this.column + ', side: ' + this.comment.side);
-        if (Session.get('oneColumnMode'))
-            return false;
-        if (this.column === 'none' || this.column === 'post')
-            return false;
-        if (this.column === 'left' && this.comment.side === 0)
-            return false ;
-        if (this.column === 'right' && this.comment.side === 1)
-            return false ;
-        return true;
-    },
     commentChainPath: function() {
         var commentThreadMode = Session.get('commentThreadMode');
 
@@ -45,25 +33,35 @@ Template.commentItem.helpers({
         return Router.routes.commentThread.path({ _id: this.comment._id});
     },
     childCount: function() {
-        //return Comments.find({ parentId: this.comment._id }).count();
         return this.comment.childCount;
     },
     childTotalCount: function() {
         return this.comment.childTotal;
     },
-    arrowDirection: function() {
-        if (this.column === 'left')
+    iconDirection: function() {
+        if (!this.needAlign)
+            return '';
+        if (this.comment.side === 0)
             return 'rightArrow';
-        if (this.column === 'right')
+        if (this.comment.side === 1)
             return 'leftArrow';
         return '';
     },
-    arrowNeeded: function() {
-        return this.needArrow  && this.comment.needArrow;
+    iconSide: function() {
+        if (!this.needAlign)
+            return '';
+        if (this.comment.side === 0)
+            return 'rightIcon';
+        if (this.comment.side === 1)
+            return 'leftIcon';
+        return '';
     },
-    oneColumnAlignSide: function() {
-        console.log("oneColumnMode: " + Session.get('oneColumnMode') + ", column: " + this.column);
-        if (Session.get('oneColumnMode') && this.column !== 'post') {
+    iconsNeeded: function() {
+        return this.comment.needArrow;
+    },
+    alignment: function() {
+        console.log("needAlign: " + this.needAlign+ ", align side: " + this.comment.side);
+        if (this.needAlign) {
             if (this.comment.side === 0)
                 return 'alignLeft';
             if (this.comment.side === 1)
@@ -72,14 +70,14 @@ Template.commentItem.helpers({
         return '';
     },
     timeline: function() {
-        if (this.column === 'post')
+        if (!this.needAlign)
             return '';
         if (this.comment._id === this.comment.chainHeadId)
             return '';
         if (this.comment.side === 0)
-            return 'timelineRight';
-        if (this.comment.side === 1)
             return 'timelineLeft';
+        if (this.comment.side === 1)
+            return 'timelineRight';
         return '';
     }
 });

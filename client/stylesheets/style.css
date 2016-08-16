@@ -1,7 +1,6 @@
 .grid-block,
 .main,
 .post,
-li .comment,
 .comment-form {
     background: #fff;
     border-radius: 5px;
@@ -147,105 +146,79 @@ body {
 }
 
 /* for comments templates */
-/* devided comments to left and right columns */
-.mainContext {
-    padding: 0;
-    margin: 0;
-}
-
-.mainContext .leftContext {
-    float: left;
-    width: 49%;
-    padding-right: 2px;
-}
-
-.mainContext .rightContext {
-    float: right;
-    width: 49%;
-}
-
-.timelineLeft { 
-  position: relative; 
-}
-
-.timelineLeft::before { 
-  content: ''; 
-  position: absolute; 
-  top: -20%; 
-  left: 5%; 
-  height: 100%; 
-  width: 8px; 
-  background: black; 
-  margin-top: 0; 
-  z-index: -1;
-}
-
-.timelineRight { 
-  position: relative; 
-}
-
-.timelineRight::after { 
-  content: ''; 
-  position: absolute; 
-  top: -30%; 
-  right: 5%; 
-  height: 100%; 
-  width: 8px; 
-  background: black; 
-  margin-top: 0; 
-  z-index: -1;
-} 
-
-/* comments */
 .comments {
     list-style-type: none;
     margin: 0;
 }
 
-.comments li {
+.comment-item {
+    display: block;
+    position: relative;
     padding: 0;
-    margin: 0;
-    //background-color: #EE6363;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-.comments li .comment {
+.comment-item:after, .comment-item:before {
+    content: '';
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+.comment-item.timelineRight:before {
+    position: absolute;
+    top: -28px;
+    left: 52.8%;
+    height: 100%;
+    width: 5px;
+    background: #ee4d4d;
+    margin-top: 0;
+    z-index: -1;
+}
+
+.comment-item.timelineLeft:before {
+    position: absolute;
+    top: -28px;
+    left: 46.9%;
+    height: 100%;
+    width: 5px;
+    background: #ee4d4d;
+    margin-top: 0;
+    z-index: -1;
+}
+
+.comment-item .comment {
     padding: 0;
+    margin: 0;
+    display: block;
+    position: relative;
     /* for all sides */
     border-radius: 4em;
     /* for specified corners */
     border-top-right-radius:1.2em;
     border-bottom-left-radius:1.2em;
     border-bottom-right-radius:1.2em;
+    box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
     -webkit-border-top-right-radius:1.2em;
     -webkit-border-bottom-left-radius:1.2em;
     -webkit-border-bottom-right-radius:1.2em;
+    -webkit-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
     -moz-border-top-right-radius:1.2em;
     -moz-border-bottom-left-radius:1.2em;
     -moz-border-bottom-right-radius:1.2em;
+    -moz-box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.35);
     background-color: #D1EEEE;
 }
 
-.comments li .alignLeft {
+.comment-item .comment.alignLeft {
     float: left;
-    width: 80%;
-    margin: 0;
-    margin-bottom: 10px;
+    width: 49%;
 }
 
-.comments li .alignRight {
+.comment-item .comment.alignRight {
     float: right;
-    width: 80%;
-    margin: 0;
-    margin-bottom: 10px;
-    background-color: #FFE1FF;
-}
-
- .leftContext li .comment {
-    /* use default styles for now */
-}
-
-.rightContext li .comment {
-    padding: 0;
+    width: 49%;
     /* for all sides */
     border-radius: 4em;
     /* for specified corners */
@@ -261,17 +234,49 @@ body {
     background-color: #FFE1FF;
 }
 
-li .comment:before,
-li .comment:after {
+.comment-item .comment:before,
+.comment-item .comment:after {
     content: "";
     display: table;
 }
-
-li .comment:after {
+.comment-item .comment:after {
     clear: both;
 }
 
-.comment .comment-content {
+/* arrows between two columns */
+.comment-item .comment.leftArrow:before {
+    display: block;
+    position:absolute;
+    padding: 0;
+    margin: 0;
+    left: -22px;
+    bottom: 15px;
+    width:0;
+    height:0;
+    border:solid;
+    border-width: 8px 20px 8px 0px;
+    //border-color: rgba(0, 0, 0, 0) rgba(148,0,211, 0.6) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0) #ee4d4d rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+}
+
+.comment-item .comment.rightArrow:after {
+    display: block;
+    position:absolute;
+    padding: 0;
+    margin: 0;
+    right: -22px;  /* 角的位置需要细心调试 */
+    bottom: 15px;
+    width:0;
+    height:0;
+    font-size:0;
+    border:solid;
+    border-width: 8px 0px 8px 20px;
+    //border-color: rgba(0, 0, 0, 0)  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(148,0,211, 0.6);
+    border-color: rgba(0, 0, 0, 0)  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #ee4d4d;
+}
+
+.comment .comment-content,
+.comment .comment-content.alignLeft {
     display: block;
     margin: 0;
     padding: 0;
@@ -280,36 +285,11 @@ li .comment:after {
     text-decoration: none;
 }
 
-.leftContext .comment .comment-content {
-    /* use default styles for now */
-}
-
-.rightContext .comment .comment-content {
+.comment .comment-content.alignRight {
     padding: 0;
     margin-top: 1px;
     margin-left: 10px;
     margin-right: 15px;
-}
-
-.comment .challenges {
-    margin: 0;
-    margin-top: 2px;
-    margin-right: 10px;
-    font-size: 12px;
-    display: block;
-    float: right;
-    color:#00868B;
-}
-
-.leftContext .comment .challenges {
-    /* use default styles for now */
-}
-
-.rightContext .comment .challenges {
-    float: left;
-    color:#CD5C5C;
-    margin-right: 5px;
-    margin-left: 10px;
 }
 
 .comment .comment-content .author {
@@ -323,7 +303,8 @@ li .comment:after {
     color: gray;
 }
 
-.comment .comment-content .text {
+.comment .comment-content .text,
+.comment .comment-content .text.alignLeft {
     margin: 0;
     padding: 0;
     font-size: 17px;
@@ -331,51 +312,104 @@ li .comment:after {
     padding-top: 0;
 }
 
-.leftContext .comment .comment-content .text {
-    /* use default styles for now */
-}
-
-.rightContext .comment .comment-content .text {
+.comment .comment-content .text.alignRight {
     color:#EE4000;
 }
 
-.comments li p:last-child {
-    margin-bottom: 0;
+.comment .challenges,
+.comment .challenges.alignLeft {
+    margin: 0;
+    margin-top: 2px;
+    margin-right: 10px;
+    font-size: 12px;
+    display: block;
+    float: right;
+    color:#00868B;
+}
+
+.comment .challenges.alignRight {
+    float: left;
+    color:#CD5C5C;
+    margin-right: 5px;
+    margin-left: 10px;
 }
 
 /* arrows between two columns */
-.comments li .leftArrow {
-    display: inline-block;
-    float: left;
-    position:relative;
-    top: 3px;
-    left:-38px; /* 角的位置需要细心调试 */
-    width:0;
-    height:0;
-    border:solid;
-    border-width: 8px 25px 8px 0px;
-    border-color: rgba(0, 0, 0, 0) rgba(148,0,211, 0.6) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+.comment-item .icon,
+.comment-item .icon.leftIcon {
+    width: 25px;
+    height: 25px;
+    display: block;
+    position:absolute;
+    padding: 0;
+    margin: 0;
+    left: 46%;
+    bottom: 10px;
+    background: #ee4d4d;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
 }
 
-.comments li .rightArrow {
-    display: inline-block;
-    float: right;
-    position:relative;
-    top:3px;
-    right:-38px; /* 角的位置需要细心调试 */
-    width:0;
-    height:0;
-    font-size:0;
-    border:solid;
-    border-width: 8px 0px 8px 25px;
-    border-color: rgba(0, 0, 0, 0)  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(148,0,211, 0.6);
+.comment-item .icon.rightIcon {
+    left: 51.8%;
+    background: #ee4d4d;
 }
 
-/* to hide comments which appear on the wrong column,
-we do this to hide the comment while hold its place, so that
-simulate a chatroom scienario.  */
-.visibleDisallowed {
-    visibility: hidden;
+.comment-item .icon img {
+    position: relative;
+    top: 4%;
+    left: 8%;
+}
+
+.comment-item p:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 995px) {
+
+.comment-item .comment.alignLeft {
+    width: 90%;
+}
+
+.comment-item .comment.alignRight {
+    width: 90%;
+}
+
+.comment-item.timelineRight:before {
+    left: 94.5%;
+}
+
+.comment-item.timelineLeft:before {
+    left: 4.5%;
+}
+
+.comment-item .comment.leftArrow:before {
+    left: -17px;
+    border-width: 8px 15px 8px 0px;
+}
+
+.comment-item .comment.rightArrow:after {
+    right: -17px;
+    border-width: 8px 0px 8px 15px;
+}
+
+.comment-item .icon,
+.comment-item .icon.leftIcon {
+    width: 23px;
+    height: 23px;
+    left: 3.2%;
+}
+
+.comment-item .icon.rightIcon {
+    left: 93.2%;
+}
+
+.comment-item .icon img {
+    position: relative;
+    top: 1%;
+    left: 2%;
+}
 }
 
 .dropdown-menu span {

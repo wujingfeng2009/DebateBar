@@ -14,6 +14,5 @@ Meteor.startup(function() {
         Session.set('commentThreadMode', false);
         Session.set('animationMode', false);
         Session.set('showSiblingsMode', true);
-        Session.set('oneColumnMode', false);
     });
 });

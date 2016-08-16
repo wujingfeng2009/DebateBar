@@ -1,16 +1,5 @@
 Template.commentThread.helpers({
-    commentArgs: function(comment, column, needArrow) {
-        //console.log('comment[: ' + comment._id + '] column: ' + column + 'need arrow: ' + needArrow);
-        return {
-            comment,
-            column: column,
-            needArrow: needArrow,
-        };
-    },
-    needCommentChainSubmit: function(column) {
-        return column === this.lastCommentSide ? false : true;
-    },
-    commentList: function() {
+    commentsList: function() {
         var parent = null;
         var context = new Array();
         Session.set('lastThreadCommentId', this.threadComment._id);
@@ -78,8 +67,5 @@ Template.commentThread.helpers({
     },
     parentPost: function() {
         return Posts.findOne(this.threadComment.postId);
-    },
-    oneColumnMode: function() {
-        return Session.get('oneColumnMode');
     }
 });

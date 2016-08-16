@@ -1,15 +1,17 @@
 <template name="commentItem">
-    <li class="{{#if visibleDisallowed}} visibleDisallowed {{/if}} {{timeline}}">
-        <div  class="comment {{oneColumnAlignSide}}">
-            <a href=" {{commentChainPath}}" class="comment-content">
+    <div class="comment-item {{timeline}}">
+        <div  class="comment {{alignment}} {{#if iconsNeeded}} {{iconDirection}} {{/if}}">
+            <a href=" {{commentChainPath}}" class="comment-content {{alignment}}">
                 <p>
                     <span class="author">{{comment.author}}</span>
                     <span class="date">  on {{submittedText}}</span>
                 </p>
-                <p class="text">{{comment.body}}</p>
+                <p class="text {{alignment}}">{{comment.body}}</p>
             </a>
-            <div  class="challenges ">{{childCount}} Challenges, {{childTotalCount}} sub-comments</div>
+            <div  class="challenges {{alignment}}">{{childCount}} Challenges, {{childTotalCount}} sub-comments</div>
         </div>
-        <div class="{{#if arrowNeeded}} {{arrowDirection}} {{/if}}"></div>
-    </li>
+        <div class="{{#if iconsNeeded}} icon {{iconSide}} {{/if}}">
+            {{#if iconsNeeded}} <img src="/star.svg" alt=""> {{/if}}
+        </div>
+    </div>
 </template>
