@@ -1,12 +1,8 @@
 <template name="commentChainSubmit">
-    <form name="comment" class="comment-form form">
+    <form name="comment" class="comment-form form {{alignment}}">
         <div class="form-group {{errorClass 'body'}}">
             <div class="controls">
-                {{#if isSameSide}}
-                    <label for="body">support parent comment</label>
-                {{else}}
                     <label for="body">Challenge parent comment</label>
-                {{/if}}
                 <textarea name="body" id="body" class="form-control" rows="3"></textarea>
                 <span class="help-block">{{errorMessage 'body'}}</span>
             </div>

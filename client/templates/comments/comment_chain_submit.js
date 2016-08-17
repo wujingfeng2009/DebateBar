@@ -9,8 +9,12 @@ Template.commentChainSubmit.helpers({
     errorClass: function(field) {
         return !!Session.get('commentChainSubmitErrors')[field] ? 'has-error' : '';
     },
-    isSameSide: function(field) {
-        return this.sameside;
+    alignment: function() {
+        if (this.alignSide === 1)
+            return "alignRight";
+        if (this.alignSide === 0)
+            return "alignLeft";
+        return '';
     },
 });
 

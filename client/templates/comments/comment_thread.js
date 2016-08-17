@@ -62,8 +62,12 @@ Template.commentThread.helpers({
             childArray = children;
         }
 
+        context[context.length - 1].needArrow = false;
         this.lastCommentSide = context[context.length - 1].side;
         return context;
+    },
+    lastCommentSide: function() {
+        return this.lastCommentSide;
     },
     parentPost: function() {
         return Posts.findOne(this.threadComment.postId);

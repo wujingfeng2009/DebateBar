@@ -366,6 +366,15 @@ body {
     margin-bottom: 0;
 }
 
+.comments .comment-form.alignLeft {
+    float: left;
+    width: 50%;
+}
+.comments .comment-form.alignRight {
+    float: right;
+    width: 50%;
+}
+
 @media screen and (max-width: 995px) {
 
 .comment-item .comment.alignLeft {

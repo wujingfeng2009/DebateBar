@@ -7,6 +7,6 @@
             {{#each child in childComments}}
                 {{> commentItem comment = child needAlign = true}}
             {{/each}}
-            {{> commentChainSubmit chainCom=chainComment sameside=false }}
+            {{> commentChainSubmit chainCom=chainComment alignSide=childrenCommentSide }}
         </div>
 </template>

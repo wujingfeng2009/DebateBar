@@ -38,7 +38,10 @@ Template.commentItem.helpers({
     childTotalCount: function() {
         return this.comment.childTotal;
     },
-    iconDirection: function() {
+    arrowNeeded: function() {
+        return this.comment.needArrow;
+    },
+    arrowDirection: function() {
         if (!this.needAlign)
             return '';
         if (this.comment.side === 0)
@@ -46,6 +49,9 @@ Template.commentItem.helpers({
         if (this.comment.side === 1)
             return 'leftArrow';
         return '';
+    },
+    iconsNeeded: function() {
+        return this.comment.needArrow;
     },
     iconSide: function() {
         if (!this.needAlign)
@@ -55,9 +61,6 @@ Template.commentItem.helpers({
         if (this.comment.side === 1)
             return 'leftIcon';
         return '';
-    },
-    iconsNeeded: function() {
-        return this.comment.needArrow;
     },
     alignment: function() {
         console.log("needAlign: " + this.needAlign+ ", align side: " + this.comment.side);

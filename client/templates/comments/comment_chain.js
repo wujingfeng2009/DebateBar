@@ -9,10 +9,16 @@ Template.commentChain.helpers({
         Session.set('lastThreadCommentId', '');
 
         var showSiblingsMode = Session.get('showSiblingsMode');
-        var parent = Comments.findOne(this.chainComment._id);
+        var parent = this.chainComment;
+        var hasChild = Comments.find({ parentId: parent._id }, {sort: { childTotal: -1, submitted: -1}}).count() && true;
         while (parent) {
             //console.log('push parent[' + parent._id + ']: ' + parent.body);
-            parent.needArrow = true; // for arrows
+            if (parent._id === this.chainComment._id) {
+                if (hasChild)
+                    parent.needArrow = true; // for arrows
+            } else
+                parent.needArrow = true; // for arrows
+
             context.push(parent);
             if (parent.parentId === '')
                 break;
@@ -45,7 +51,11 @@ Template.commentChain.helpers({
         }
 
         context.reverse();
+        this.tailComment = context[context.length - 1];
         return context;
+    },
+    childrenCommentSide: function() {
+        return this.chainComment.side === 0 ? 1 : 0;
     },
     parentPost: function() {
         return Posts.findOne(this.chainComment.postId);
