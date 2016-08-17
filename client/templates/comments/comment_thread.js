@@ -67,7 +67,7 @@ Template.commentThread.helpers({
         return context;
     },
     lastCommentSide: function() {
-        return this.lastCommentSide;
+        return this.lastCommentSide === 0 ? 1 : 0;
     },
     parentPost: function() {
         return Posts.findOne(this.threadComment.postId);
