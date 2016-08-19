@@ -1,3 +1,11 @@
+Template.commentItem.onCreated( function () {
+    this.state = new ReactiveDict();
+    this.state.setDefault({
+    submitFormOpen: false,
+    reportFormOpen: false,
+    });
+});
+
 Template.commentItem.helpers({
     submittedText: function() {
         return this.comment.submitted.toString();
@@ -82,5 +90,16 @@ Template.commentItem.helpers({
         if (this.comment.side === 1)
             return 'timelineRight';
         return '';
+    },
+    needSubmit: function() {
+        const instance = Template.instance();
+        return instance.state.get('submitFormOpen');
+    }
+});
+
+Template.commentItem.events({
+    'click .submit-toggle': function(e, instance) {
+        instance.state.set('submitFormOpen', !instance.state.get('submitFormOpen'));
+        e.preventDefault();
     }
 });

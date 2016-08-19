@@ -8,7 +8,11 @@
                 </p>
                 <p class="text {{alignment}}">{{comment.body}}</p>
             </a>
-            <div  class="challenges {{alignment}}">{{childCount}} Challenges, {{childTotalCount}} sub-comments</div>
+            <div  class="challenges {{alignment}}">
+                    <a href="javascript:void(0)" class="submit-toggle">submit</a>
+                    {{childCount}} Challenges, {{childTotalCount}} sub-comments
+            </div>
+            {{#if needSubmit}} {{> commentSubmit }} {{/if}}
         </div>
         <div class="{{#if iconsNeeded}} icon {{iconSide}} {{/if}}">
             {{#if iconsNeeded}} <img src="/star.svg" alt=""> {{/if}}
