@@ -94,6 +94,9 @@ Template.commentItem.helpers({
     needSubmit: function() {
         const instance = Template.instance();
         return instance.state.get('submitFormOpen');
+    },
+    showLoginPrompt: function() {
+        throwError("Please log in to leave a comment!");
     }
 });
 

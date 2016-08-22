@@ -8,14 +8,7 @@ Template.commentChainSubmit.helpers({
     },
     errorClass: function(field) {
         return !!Session.get('commentChainSubmitErrors')[field] ? 'has-error' : '';
-    },
-    alignment: function() {
-        if (this.alignSide === 1)
-            return "alignRight";
-        if (this.alignSide === 0)
-            return "alignLeft";
-        return '';
-    },
+    }
 });
 
 Template.commentChainSubmit.events({
@@ -23,33 +16,22 @@ Template.commentChainSubmit.events({
         e.preventDefault();
 
         var $body = $(e.target).find('[name=body]');
-        var comment ={};
-        console.log('jimvon sameside: ' + template.data.sameside + ' comChain id: ' + template.data.chainCom._id );
-        if (template.data.sameside) {
-            comment = {
-                body: $body.val(),
-                chainHeadId: template.data.chainCom.chainHeadId,
-                parentId: template.data.chainCom._id,
-                postId: template.data.chainCom.postId,
-                side: template.data.chainCom.side,
-            };
-        } else {
-            comment = {
-                body: $body.val(),
-                chainHeadId: template.data.chainCom.chainHeadId,
-                parentId: template.data.chainCom._id,
-                postId: template.data.chainCom.postId,
-                side: template.data.chainCom.side === 0 ? 1 : 0,
-            };
-        }
+        var comm = {
+            body: $body.val(),
+            chainHeadId: template.data.comment.chainHeadId,
+            parentId: template.data.comment._id,
+            postId: template.data.comment.postId,
+            side: template.data.comment.side === 0 ? 1 : 0,
+        };
 
         var errors = {};
-        if (!comment.body) {
+        if (!comm.body) {
             errors.body = "Please write some content";
             return Session.set('commentChainSubmitErrors', errors);
         }
 
-        Meteor.call('commentInsert', comment, function(error, commentId) {
+        console.log("jimvon comment._id: " + template.data.comment._id + ", chainHeadId: " + template.data.comment.chainHeadId);
+        Meteor.call('commentInsert', comm, function(error, commentId) {
             if (error) {
                 throwError(error.reason);
             } else {

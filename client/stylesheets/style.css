@@ -325,6 +325,7 @@ body {
     display: block;
     float: right;
     color:#00868B;
+    clear: both;
 }
 
 .comment .challenges.alignRight {
@@ -332,6 +333,13 @@ body {
     color:#CD5C5C;
     margin-right: 5px;
     margin-left: 10px;
+}
+
+.comment .commentChain-form {
+    margin: 8px;
+    display: block;
+    //background-color: yellow;
+    clear: both;
 }
 
 /* arrows between two columns */

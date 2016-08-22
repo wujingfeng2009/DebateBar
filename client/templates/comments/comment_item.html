@@ -12,7 +12,13 @@
                     <a href="javascript:void(0)" class="submit-toggle">submit</a>
                     {{childCount}} Challenges, {{childTotalCount}} sub-comments
             </div>
-            {{#if needSubmit}} {{> commentSubmit }} {{/if}}
+            {{#if needSubmit}}
+                {{#if currentUser}}
+                    {{> commentChainSubmit comment=comment }}
+                {{else}}
+                    {{showLoginPrompt}}
+                {{/if}}
+            {{/if}}
         </div>
         <div class="{{#if iconsNeeded}} icon {{iconSide}} {{/if}}">
             {{#if iconsNeeded}} <img src="/star.svg" alt=""> {{/if}}
