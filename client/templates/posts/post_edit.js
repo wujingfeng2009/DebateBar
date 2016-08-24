@@ -50,6 +50,9 @@ Template.postEdit.events({
             if (this.userId != Meteor.userId()) {
                 throwError('invalid user, delete denied!');
                 return;
+            } else if (this.childCount !== 0) {
+                throwError('can not delete a post that have children, delete denied!');
+                return;
             }
 
             var currentPostId = this._id;

@@ -1,13 +1,13 @@
 <template name="postPage">
     {{> postItem}}
+    {{#if currentUser}} {{> commentSubmit }} {{else}}
+    <p>Please log in to leave a comment.</p>
+    {{/if}}
     <div class="comments">
     {{#each com in comments}}
                 {{> commentItem comment = com needAlign = false}}
     {{/each}}
     </div>
-    {{#if currentUser}} {{> commentSubmit }} {{else}}
-    <p>Please log in to leave a comment.</p>
-    {{/if}}
 </template>
 
 

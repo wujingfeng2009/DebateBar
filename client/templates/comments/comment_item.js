@@ -104,5 +104,24 @@ Template.commentItem.events({
     'click .submit-toggle': function(e, instance) {
         instance.state.set('submitFormOpen', !instance.state.get('submitFormOpen'));
         e.preventDefault();
+    },
+    'click .delete': function(e, instance) {
+        e.preventDefault();
+
+        if (confirm("Delete this comment?")) {
+            if (this.comment.userId != Meteor.userId()) {
+                console.log('jimvon this.userId: ' + this.userId + 'Meteor.userId: ' + Meteor.userId());
+                throwError('invalid user, delete denied!');
+                return;
+            }
+
+            //Comments.remove(this.comment._id);
+            Meteor.call('commentRemove', this.comment._id);
+            if (this.comment.parentId === '') {
+                var nextPath = Router.routes.postPage.path({ _id: this.comment.postId });
+                Router.go(nextPath);
+            }
+            //Router.go('home');
+        }
     }
 });
