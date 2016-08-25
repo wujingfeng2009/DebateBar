@@ -115,6 +115,12 @@ Template.commentItem.events({
                 return;
             }
 
+            var children = Comments.find({ parentId: this.comment._id }).count();
+            if (children > 0) {
+                throwError('can not delete a comment that have sub-comments, delete denied!');
+                return;
+            }
+
             //Comments.remove(this.comment._id);
             Meteor.call('commentRemove', this.comment._id);
             if (this.comment.parentId === '') {

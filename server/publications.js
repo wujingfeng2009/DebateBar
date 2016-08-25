@@ -34,7 +34,7 @@ Meteor.publish('commentsTree', function(commentId) {
 });
 
 Meteor.publish('commentParentPost', function(commentId) {
-    check(commentId, String)
+    check(commentId, String);
     var comment = Comments.findOne(commentId);
     if (!comment) {
         console.log('can not find comment from comment Id: ' + commentId + '!');
@@ -46,4 +46,15 @@ Meteor.publish('commentParentPost', function(commentId) {
 
 Meteor.publish('notifications', function() {
     return Notifications.find({ userId: this.userId, read: false });
+});
+
+Meteor.publish('Meteor.users.userContext', function (userId) {
+    check(userId, String);
+
+    // Only return one field, `userContext`
+    const options = {
+    fields: { userContext: 1 }
+    };
+
+  return Meteor.users.find(userId, options);
 });
