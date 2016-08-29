@@ -97,6 +97,7 @@ Template.commentItem.helpers({
     },
     showLoginPrompt: function() {
         throwError("Please log in to leave a comment!");
+        //alert("Please log in to leave a comment!");
     }
 });
 
@@ -108,18 +109,18 @@ Template.commentItem.events({
     'click .delete': function(e, instance) {
         e.preventDefault();
 
-        if (confirm("Delete this comment?")) {
-            if (this.comment.userId != Meteor.userId()) {
-                console.log('jimvon this.userId: ' + this.userId + 'Meteor.userId: ' + Meteor.userId());
-                throwError('invalid user, delete denied!');
-                return;
-            }
+        if (this.comment.userId != Meteor.userId()) {
+            console.log('jimvon this.userId: ' + this.userId + 'Meteor.userId: ' + Meteor.userId());
+            throwError('invalid user, delete denied!');
+            return;
+        }
+        var children = Comments.find({ parentId: this.comment._id }).count();
+        if (children > 0) {
+            throwError('can not delete a comment that have sub-comments, delete denied!');
+            return;
+        }
 
-            var children = Comments.find({ parentId: this.comment._id }).count();
-            if (children > 0) {
-                throwError('can not delete a comment that have sub-comments, delete denied!');
-                return;
-            }
+        if (confirm("Delete this comment?")) {
 
             //Comments.remove(this.comment._id);
             Meteor.call('commentRemove', this.comment._id);

@@ -24,6 +24,7 @@ Template.commentSubmit.events({
             side: 0,
         };
 
+        console.log('jimvon call commentInsert, postId: ' + template.data._id);
         var errors = {};
         if (!comment.body) {
             errors.body = "Please write some content";

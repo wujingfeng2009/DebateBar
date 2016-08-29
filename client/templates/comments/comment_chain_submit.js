@@ -30,13 +30,13 @@ Template.commentChainSubmit.events({
             return Session.set('commentChainSubmitErrors', errors);
         }
 
-        console.log("jimvon comment._id: " + template.data.comment._id + ", chainHeadId: " + template.data.comment.chainHeadId);
+        console.log("jimvon comment.parentId: " + template.data.comment._id + ", chainHeadId: " + template.data.comment.chainHeadId);
         Meteor.call('commentInsert', comm, function(error, commentId) {
             if (error) {
                 throwError(error.reason);
             } else {
                 $body.val('');
-                //Router.go(Router.routes.commentChain.path({ _id: template.data.chainCom._id}));
+                Router.go(Router.routes.commentChain.path({ _id: template.data.comment._id}));
             }
         });
     }
