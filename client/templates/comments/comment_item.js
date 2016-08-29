@@ -17,6 +17,8 @@ Template.commentItem.helpers({
         var lastThreadCommentId = Session.get('lastThreadCommentId');
         //console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
         if (!commentThreadMode) {
+            if (this.comment.childCount === 0)
+                return '#';
             if (lastChainCommentId === this.comment._id) {
                 if (this.comment.parentId !== '')
                     return Router.routes.commentChain.path({ _id: this.comment.parentId});
