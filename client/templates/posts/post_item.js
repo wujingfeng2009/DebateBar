@@ -47,7 +47,7 @@ Template.postItem.helpers({
     navigateText: function() {
         var currentRouteName = Router.current().route.getName();
 
-        if (currentRouteName === 'postPage')
+        if (currentRouteName === 'postPage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
             return 'Back';
         return 'Discuss';
     }
@@ -67,10 +67,15 @@ Template.postItem.events({
         var lastPostListPath = Session.get('lastPostListPath');
         console.log('jimvon Session.lastPostListPath: ' + lastPostListPath);
 
-        if (currentRouteName === 'postPage' && lastPostListPath && lastPostListPath !== '') {
-            Router.go(lastPostListPath);
-            return;
-        } 
+        if (lastPostListPath && lastPostListPath !== '') {
+            if (currentRouteName === 'postPage') {
+                Router.go(lastPostListPath);
+                return;
+            } else {
+                Router.go(Router.routes.postPage.path({ _id: this._id }));
+                return;
+            }
+        }
 
         var nextPath = '';
         if (Meteor.userId() && Meteor.userId() !== '') {
