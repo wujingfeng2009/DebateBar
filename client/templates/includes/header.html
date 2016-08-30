@@ -18,10 +18,10 @@
                 <li class="{{activeRouteClass  'bestPosts'}}">
                 <a href="{{pathFor 'bestPosts'}}">Best</a>
                 </li>
+                <li class="{{activeRouteClass 'postSubmit'}}">
+                  <a href="#">Debates</a>
+                </li>
                 {{#if currentUser}}
-                    <li class="{{activeRouteClass 'postSubmit'}}">
-                      <a href="{{pathFor 'postSubmit'}}">Submit Post</a>
-                    </li>
                     <li class="dropdown">
                       {{> notifications}}
                     </li>

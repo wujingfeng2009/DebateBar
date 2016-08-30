@@ -1,5 +1,5 @@
 <template name="postEdit">
-    <form class="main form">
+    <form class="form post-edit-form">
         <div class="form-group {{errorClass 'url'}}">
             <label class="control-label" for="url">URL</label>
             <div class="controls">
@@ -15,7 +15,5 @@
             </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary submit" />
-        <hr/>
-        <a class="btn btn-danger delete" href="#">Delete post</a>
     </form>
 </template>

@@ -100,7 +100,11 @@ Template.commentItem.helpers({
     showLoginPrompt: function() {
         throwError("Please log in to leave a comment!");
         //alert("Please log in to leave a comment!");
-    }
+    },
+    canDelete: function() {
+        var children = Comments.find({ parentId: this.comment._id }).count();
+        return this.comment.userId === Meteor.userId() && children === 0;
+    },
 });
 
 Template.commentItem.events({
@@ -108,7 +112,7 @@ Template.commentItem.events({
         instance.state.set('submitFormOpen', !instance.state.get('submitFormOpen'));
         e.preventDefault();
     },
-    'click .delete': function(e, instance) {
+    'click .delete-comment': function(e, instance) {
         e.preventDefault();
 
         if (this.comment.userId != Meteor.userId()) {

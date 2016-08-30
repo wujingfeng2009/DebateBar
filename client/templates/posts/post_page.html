@@ -1,7 +1,9 @@
 <template name="postPage">
     {{> postItem}}
-    {{#if currentUser}} {{> commentSubmit }} {{else}}
-    <p>Please log in to leave a comment.</p>
+    {{#if currentUser}}
+        {{> commentSubmit }}
+    {{else}}
+        <div>Please log in to leave a comment.</div>
     {{/if}}
     <div class="comments">
     {{#each com in comments}}

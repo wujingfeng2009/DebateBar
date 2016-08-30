@@ -1,5 +1,10 @@
 <template name="postsList">
     <div class="posts page">
+        {{#if currentUser}}
+            {{> postSubmit }}
+        {{else}}
+            <div>Please log in to leave a post.</div>
+        {{/if}}
         <div class="wrapper">
             {{#each posts}} {{> postItem}} {{/each}}
         </div>

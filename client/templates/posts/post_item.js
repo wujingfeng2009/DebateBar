@@ -1,6 +1,17 @@
+Template.postItem.onCreated( function () {
+    this.state = new ReactiveDict();
+    this.state.setDefault({
+    editFormOpen: false,
+    commentFormOpen: false,
+    });
+});
+
 Template.postItem.helpers({
     ownPost: function() {
         return this.userId === Meteor.userId();
+    },
+    canDelete: function() {
+        return this.userId === Meteor.userId() && this.commentsCount === 0;
     },
     domain: function() {
         var a = document.createElement('a');
@@ -50,6 +61,10 @@ Template.postItem.helpers({
         if (currentRouteName === 'postPage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
             return 'Back';
         return 'Discuss';
+    },
+    needEdit: function() {
+        const instance = Template.instance();
+        return instance.state.get('editFormOpen');
     }
 });
 
@@ -94,5 +109,26 @@ Template.postItem.events({
         }
 
         Router.go(nextPath);
+    },
+    'click .edit-toggle': function(e, instance) {
+        instance.state.set('editFormOpen', !instance.state.get('editFormOpen'));
+        e.preventDefault();
+    },
+    'click .delete-post': function(e, instance) {
+        e.preventDefault();
+
+        if (instance.data.userId != Meteor.userId()) {
+            throwError('invalid user, delete denied!');
+            return;
+        } else if (instance.data.commentsCount !== 0) {
+            throwError('can not delete a post that have children, delete denied!');
+            return;
+        }
+
+        if (confirm("Delete this post?")) {
+            var currentPostId = instance.data._id;
+            Posts.remove(currentPostId);
+            Router.go('home');
+        }
     }
 });

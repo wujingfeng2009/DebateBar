@@ -9,16 +9,16 @@
                 <p class="text {{alignment}}">{{comment.body}}</p>
             </a>
             <div  class="challenges {{alignment}}">
-                    <a href="javascript:void(0)" class="submit-toggle">Comment</a>
-                    <a href="javascript:void(0)" class="delete" >Delete</a>
-                    {{childCount}} Challenges, {{childTotalCount}} sub-comments
+                {{#if currentUser}}
+                    <a href="#" class="submit-toggle">Comment</a>
+                {{/if}}
+                {{#if canDelete}}
+                    <a href="#" class="delete-comment" >Delete</a>
+                {{/if}}
+                    sub-comments {{childCount}}, total-comments {{childTotalCount}}
             </div>
             {{#if needSubmit}}
-                {{#if currentUser}}
                     {{> commentChainSubmit comment=comment }}
-                {{else}}
-                    {{showLoginPrompt}}
-                {{/if}}
             {{/if}}
         </div>
         <div class="{{#if iconsNeeded}} icon {{iconSide}} {{/if}}">

@@ -2,9 +2,11 @@ Template.postSubmit.events({
     'submit form': function(e) {
         e.preventDefault();
 
+        var $urlString = $(e.target).find('[name=url]');
+        var $titleString = $(e.target).find('[name=title]');
         var post = {
-            url: $(e.target).find('[name=url]').val(),
-            title: $(e.target).find('[name=title]').val()
+            url: $urlString.val(),
+            title: $titleString.val()
         };
 
         var errors = validatePost(post);
@@ -18,6 +20,8 @@ Template.postSubmit.events({
             // 显示结果，跳转页面
             if (result.postExists)
                 throwError('This link has already been posted（该链接已经存在）');
+            $urlString.val('');
+            $titleString.val('');
 
             Router.go('home');
         });

@@ -5,10 +5,19 @@
             <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
             <p>
                 {{pluralize votes "Vote"}}, submitted by {{author}},
-                <a href="{{pathFor 'postPage'}}">{{commentsCount}} comments</a> {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
+                <a href="{{pathFor 'postPage'}}">{{commentsCount}} comments</a>
+                {{#if ownPost}}
+                    <a href='#' class='edit-toggle'>Edit</a>
+                {{/if}}
+                {{#if canDelete}}
+                    <a href='#' class='delete-post'>Delete</a>
+                {{/if}}
             </p>
         </div>
         <a href="#" class="discuss btn btn-default next-path" >{{navigateText}}</a>
+        {{#if needEdit}}
+            {{> postEdit }}
+        {{/if}}
         <!--  <a href="{{nextRoutePath}}" class="discuss btn btn-default">{{navigateText}}</a>  -->
     </div>
 </template>

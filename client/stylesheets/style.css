@@ -145,6 +145,11 @@ body {
     border-color:#EE6363 #EE6363 #EE6363 #EE6363;
 }
 
+.post .post-edit-form {
+    clear: both;
+    display: block;
+}
+
 /* for comments templates */
 .comments {
     list-style-type: none;

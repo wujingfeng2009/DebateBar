@@ -41,23 +41,5 @@ Template.postEdit.events({
 
             Router.go('home');
         });
-    },
-
-    'click .delete': function(e) {
-        e.preventDefault();
-
-        if (this.userId != Meteor.userId()) {
-            throwError('invalid user, delete denied!');
-            return;
-        } else if (this.childCount !== 0) {
-            throwError('can not delete a post that have children, delete denied!');
-            return;
-        }
-
-        if (confirm("Delete this post?")) {
-            var currentPostId = this._id;
-            Posts.remove(currentPostId);
-            Router.go('home');
-        }
     }
 });
