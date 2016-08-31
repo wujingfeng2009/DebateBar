@@ -18,8 +18,8 @@
                 <li class="{{activeRouteClass  'bestPosts'}}">
                 <a href="{{pathFor 'bestPosts'}}">Best</a>
                 </li>
-                <li class="{{activeRouteClass 'postSubmit'}}">
-                  <a href="#">Debates</a>
+                <li class="{{activeRouteClass  'bestPosts'}}">
+                <a href="{{pathFor 'bestPosts'}}">Favorite</a>
                 </li>
                 {{#if currentUser}}
                     <li class="dropdown">
@@ -32,5 +32,23 @@
             </ul>
         </div>
       </div>
+    {{#if needSubNavbar}}
+        <div class="collapse navbar-collapse sub-navbar">
+            <ul class="nav navbar-nav">
+                <li class="{{activeRouteClass 'home' 'newPosts'}}">
+                <a href="{{pathFor 'newPosts'}}">Topics</a>
+                </li>
+                <li class="{{activeRouteClass  'bestPosts'}}">
+                <a href="{{pathFor 'bestPosts'}}">Debates</a>
+                </li>
+                <li class="{{activeRouteClass  'bestPosts'}}">
+                <a href="{{pathFor 'bestPosts'}}">Predictions</a>
+                </li>
+                <li class="{{activeRouteClass  'bestPosts'}}">
+                <a href="{{pathFor 'bestPosts'}}">Bets</a>
+                </li>
+            </ul>
+        </div>
+    {{/if}}
     </nav>
 </template>
