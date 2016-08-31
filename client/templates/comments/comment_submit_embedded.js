@@ -1,8 +1,8 @@
-Template.commentChainSubmit.onCreated(function() {
+Template.commentSubmitEmbedded.onCreated(function() {
     Session.set('commentChainSubmitErrors', {});
 });
 
-Template.commentChainSubmit.helpers({
+Template.commentSubmitEmbedded.helpers({
     errorMessage: function(field) {
         return Session.get('commentChainSubmitErrors')[field];
     },
@@ -11,7 +11,7 @@ Template.commentChainSubmit.helpers({
     }
 });
 
-Template.commentChainSubmit.events({
+Template.commentSubmitEmbedded.events({
     'submit form': function(e, template) {
         e.preventDefault();
 

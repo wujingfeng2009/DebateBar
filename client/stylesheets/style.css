@@ -340,7 +340,7 @@ body {
     margin-left: 10px;
 }
 
-.comment .commentChain-form {
+.comment .comment-submit-embedded-form {
     margin: 8px;
     display: block;
     //background-color: yellow;

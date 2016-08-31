@@ -10,15 +10,15 @@
             </a>
             <div  class="challenges {{alignment}}">
                 {{#if currentUser}}
-                    <a href="#" class="submit-toggle">Comment</a>
+                    <a href="#" class="submit-toggle"> Comment </a>
                 {{/if}}
                 {{#if canDelete}}
-                    <a href="#" class="delete-comment" >Delete</a>
+                    <a href="#" class="delete-comment" > Delete </a>
                 {{/if}}
-                    sub-comments {{childCount}}, total-comments {{childTotalCount}}
+                    sub-comments: {{childCount}},  total-comments: {{childTotalCount}}
             </div>
             {{#if needSubmit}}
-                    {{> commentChainSubmit comment=comment }}
+                    {{> commentSubmitEmbedded comment=comment }}
             {{/if}}
         </div>
         <div class="{{#if iconsNeeded}} icon {{iconSide}} {{/if}}">
