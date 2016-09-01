@@ -35,18 +35,20 @@
                 </ul>
             </div>
         </div>
-        <div class="collapse navbar-collapse sub-navbar">
-            <ul class="nav navbar-nav">
-                <li class="{{activeRouteClass 'home' 'new'}}">
-                <a href="{{pathFor 'newTopics'}}">New</a>
-                </li>
-                <li class="{{activeRouteClass  'hot'}}">
-                <a href="{{pathFor 'hotTopics'}}">Hot</a>
-                </li>
-                <li class="{{activeRouteClass  'favorite'}}">
-                <a href="{{pathFor 'favoriteTopics'}}">Favorite</a>
-                </li>
-            </ul>
-        </div>
+        {{#if needSubNavbar}}
+            <div class="collapse navbar-collapse sub-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="{{activeRouteClass 'home' 'new'}}">
+                    <a href="{{pathForNew}}">New</a>
+                    </li>
+                    <li class="{{activeRouteClass  'hot'}}">
+                    <a href="{{pathForHot}}">Hot</a>
+                    </li>
+                    <li class="{{activeRouteClass  'favorite'}}">
+                    <a href="{{pathForFavorite}}">Favorite</a>
+                    </li>
+                </ul>
+            </div>
+        {{/if}}
     </nav>
 </template>

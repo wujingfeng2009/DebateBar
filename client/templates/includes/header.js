@@ -16,28 +16,63 @@ Template.header.helpers({
     return active && 'active';
   },
   needSubNavbar: function() {
-    return false;
+
     //const instance = Template.instance();
     //var subNavbarOpen = instance.state.get('subNavbarOpen');
 
     var currentRouteName = Router.current().route.getName();
     console.log('jimvon currentRouteName: ' + currentRouteName);
 
-    if (currentRouteName === 'newTopics' || currentRouteName === 'bestTopics'
-        || currentRouteName === 'favoriteTopics' || currentRouteName === 'home')
+    if (currentRouteName.indexOf('Topics') >= 0
+        || currentRouteName.indexOf('Debates') >= 0
+        || currentRouteName.indexOf('Predictions') >= 0
+        || currentRouteName.indexOf('Bets') >= 0
+        || currentRouteName.indexOf('home') >= 0)
         return true;
-    else
-        return false;
+
+    return false;
   },
   pathForNew: function() {
     var currentRouteName = Router.current().route.getName();
-    console.log('jimvon currentRouteName: ' + currentRouteName);
 
-    if (currentRouteName === 'newPosts' || currentRouteName === 'bestPosts'
-        || currentRouteName === 'favoritePosts' || currentRouteName === 'home')
-        return true;
-    else
-        return false;
+    if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
+        return Router.routes.newTopics.path({ postsLimit: 5});
+    else if (currentRouteName.indexOf('Debates') >= 0)
+        return Router.routes.newDebates.path({ debatesLimit: 5});
+    else if (currentRouteName.indexOf('Predictions') >= 0)
+        return Router.routes.newPredictions.path({ predictionsLimit: 5});
+    else if (currentRouteName.indexOf('Bets') >= 0)
+        return Router.routes.newBets.path({ betsLimit: 5});
+
+    return '#';
+  },
+  pathForHot: function() {
+    var currentRouteName = Router.current().route.getName();
+
+    if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
+        return Router.routes.hotTopics.path({ postsLimit: 5});
+    else if (currentRouteName.indexOf('Debates') >= 0)
+        return Router.routes.hotDebates.path({ debatesLimit: 5});
+    else if (currentRouteName.indexOf('Predictions') >= 0)
+        return Router.routes.hotPredictions.path({ predictionsLimit: 5});
+    else if (currentRouteName.indexOf('Bets') >= 0)
+        return Router.routes.hotBets.path({ betsLimit: 5});
+
+    return '#';
+  },
+  pathForFavorite: function() {
+    var currentRouteName = Router.current().route.getName();
+
+    if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
+        return Router.routes.favoriteTopics.path({ postsLimit: 5});
+    else if (currentRouteName.indexOf('Debates') >= 0)
+        return Router.routes.favoriteDebates.path({ debatesLimit: 5});
+    else if (currentRouteName.indexOf('Predictions') >= 0)
+        return Router.routes.favoritePredictions.path({ predictionsLimit: 5});
+    else if (currentRouteName.indexOf('Bets') >= 0)
+        return Router.routes.favoriteBets.path({ betsLimit: 5});
+
+    return '#';
   }
 });
 
