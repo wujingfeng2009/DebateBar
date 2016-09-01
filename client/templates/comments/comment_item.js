@@ -23,7 +23,7 @@ Template.commentItem.helpers({
                 if (this.comment.parentId !== '')
                     return Router.routes.commentChain.path({ _id: this.comment.parentId});
                 else
-                    return Router.routes.postPage.path({ _id: this.comment.postId});
+                    return Router.routes.topicPage.path({ _id: this.comment.postId});
             }
             return Router.routes.commentChain.path({ _id: this.comment._id});
         }
@@ -32,7 +32,7 @@ Template.commentItem.helpers({
             if (this.comment.parentId !== '')
                 return Router.routes.commentChain.path({ _id: this.comment.parentId});
             else {
-                return Router.routes.postPage.path({ _id: this.comment.postId});
+                return Router.routes.topicPage.path({ _id: this.comment.postId});
             }
         }
 
@@ -131,7 +131,7 @@ Template.commentItem.events({
             //Comments.remove(this.comment._id);
             Meteor.call('commentRemove', this.comment._id);
             if (this.comment.parentId === '') {
-                var nextPath = Router.routes.postPage.path({ _id: this.comment.postId });
+                var nextPath = Router.routes.topicPage.path({ _id: this.comment.postId });
                 Router.go(nextPath);
             }
             //Router.go('home');

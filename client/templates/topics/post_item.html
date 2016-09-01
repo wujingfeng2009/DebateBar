@@ -5,7 +5,7 @@
             <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
             <p>
                 {{pluralize votes "Vote"}}, submitted by {{author}},
-                <a href="{{pathFor 'postPage'}}">{{commentsCount}} comments</a>
+                <a href="{{pathFor 'topicPage'}}">{{commentsCount}} comments</a>
                 {{#if ownPost}}
                     <a href='#' class='edit-toggle'>Edit</a>
                 {{/if}}

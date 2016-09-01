@@ -1,7 +1,7 @@
 /*
-Template.postsList.helpers({
-    posts: function() {
-        return Posts.find({}, { sort: { submitted: -1 } });
+Template.debatesList.helpers({
+    debates: function() {
+        return Debates.find({}, { sort: { submitted: -1 } });
     }
 });
 */

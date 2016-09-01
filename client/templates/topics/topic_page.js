@@ -1,4 +1,4 @@
-Template.postPage.helpers({
+Template.topicPage.helpers({
     comments: function() {
         Session.set('lastChainCommentId', '');
         Session.set('lastThreadCommentId', '');

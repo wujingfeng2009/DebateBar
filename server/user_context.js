@@ -1,7 +1,10 @@
 createUserContext = function(user) {
     console.log('createUserContext: userId: ' + user._id);
     user.userContext = {
-        lastPostListPath: '',
+        lastTopicsListPath: '',
+        lastDebatesListPath: '',
+        lastPredictionsListPath: '',
+        lastBetsListPath: '',
     };
 };
 

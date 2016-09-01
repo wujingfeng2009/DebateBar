@@ -30,35 +30,10 @@ Template.postItem.helpers({
             return 'disabled';
         }
     },
-    nextRoutePath: function() {
-        var currentPath = Router.current().url;
-        var currentRouteName = Router.current().route.getName();
-        console.log('jimvon currentPath: ' + currentPath + ', currentRouteName: ' + currentRouteName);
-
-        if (Meteor.userId() && Meteor.userId() !== '') {
-            if (currentRouteName === 'postPage') {
-                if (Meteor.user().userContext && Meteor.user().userContext.lastPostListPath !== '')
-                    return Meteor.user().userContext.lastPostListPath;
-                else
-                    return '/';
-            } else
-                return Router.routes.postPage.path({ _id: this._id });
-        } else {
-            if (currentRouteName === 'postPage') {
-                var lastPostListPath = Session.get('lastPostListPath');
-                if (!lastPostListPath || lastPostListPath === '')
-                    return '/';
-                else
-                    return lastPostListPath;
-            }
-            else
-                return Router.routes.postPage.path({ _id: this._id });
-        }
-    },
     navigateText: function() {
         var currentRouteName = Router.current().route.getName();
 
-        if (currentRouteName === 'postPage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
+        if (currentRouteName === 'topicPage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
             return 'Back';
         return 'Discuss';
     },
@@ -79,33 +54,33 @@ Template.postItem.events({
         var currentRouteName = Router.current().route.getName();
         console.log('jimvon currentRouteName: ' + currentRouteName);
 
-        var lastPostListPath = Session.get('lastPostListPath');
-        console.log('jimvon Session.lastPostListPath: ' + lastPostListPath);
+        var lastTopicsListPath = Session.get('lastTopicsListPath');
+        console.log('jimvon Session.lastTopicsListPath: ' + lastTopicsListPath);
 
-        if (lastPostListPath && lastPostListPath !== '') {
-            if (currentRouteName === 'postPage') {
-                Router.go(lastPostListPath);
+        if (lastTopicsListPath && lastTopicsListPath !== '') {
+            if (currentRouteName === 'topicPage') {
+                Router.go(lastTopicsListPath);
                 return;
             } else {
-                Router.go(Router.routes.postPage.path({ _id: this._id }));
+                Router.go(Router.routes.topicPage.path({ _id: this._id }));
                 return;
             }
         }
 
         var nextPath = '';
         if (Meteor.userId() && Meteor.userId() !== '') {
-            if (currentRouteName === 'postPage') {
-                if (Meteor.user().userContext && Meteor.user().userContext.lastPostListPath !== '')
-                    nextPath = Meteor.user().userContext.lastPostListPath;
+            if (currentRouteName === 'topicPage') {
+                if (Meteor.user().userContext && Meteor.user().userContext.lastTopicsListPath !== '')
+                    nextPath = Meteor.user().userContext.lastTopicsListPath;
                 else
                     nextPath = '/';
             } else
-                nextPath = Router.routes.postPage.path({ _id: this._id });
+                nextPath = Router.routes.topicPage.path({ _id: this._id });
         } else {
-            if (currentRouteName === 'postPage') {
+            if (currentRouteName === 'topicPage') {
                     nextPath = '/';
             } else
-                nextPath = Router.routes.postPage.path({ _id: this._id });
+                nextPath = Router.routes.topicPage.path({ _id: this._id });
         }
 
         Router.go(nextPath);

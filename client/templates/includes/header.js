@@ -36,7 +36,7 @@ Template.header.helpers({
     var currentRouteName = Router.current().route.getName();
 
     if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
-        return Router.routes.newTopics.path({ postsLimit: 5});
+        return Router.routes.newTopics.path({ topicsLimit: 5});
     else if (currentRouteName.indexOf('Debates') >= 0)
         return Router.routes.newDebates.path({ debatesLimit: 5});
     else if (currentRouteName.indexOf('Predictions') >= 0)
@@ -50,7 +50,7 @@ Template.header.helpers({
     var currentRouteName = Router.current().route.getName();
 
     if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
-        return Router.routes.hotTopics.path({ postsLimit: 5});
+        return Router.routes.hotTopics.path({ topicsLimit: 5});
     else if (currentRouteName.indexOf('Debates') >= 0)
         return Router.routes.hotDebates.path({ debatesLimit: 5});
     else if (currentRouteName.indexOf('Predictions') >= 0)
@@ -64,7 +64,7 @@ Template.header.helpers({
     var currentRouteName = Router.current().route.getName();
 
     if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
-        return Router.routes.favoriteTopics.path({ postsLimit: 5});
+        return Router.routes.favoriteTopics.path({ topicsLimit: 5});
     else if (currentRouteName.indexOf('Debates') >= 0)
         return Router.routes.favoriteDebates.path({ debatesLimit: 5});
     else if (currentRouteName.indexOf('Predictions') >= 0)
