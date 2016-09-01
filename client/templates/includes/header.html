@@ -1,54 +1,52 @@
 <template name="header">
     <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{pathFor 'home'}}">Debate Bar</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navigation">
-            <ul class="nav navbar-nav">
-                <li class="{{activeRouteClass 'home' 'Posts'}}">
-                <a href="{{pathFor 'newPosts'}}">Topics</a>
-                </li>
-                <li class="{{activeRouteClass  'Debates'}}">
-                <a href="{{pathFor 'bestPosts'}}">Debates</a>
-                </li>
-                <li class="{{activeRouteClass  'Predictions'}}">
-                <a href="{{pathFor 'bestPosts'}}">Predictions</a>
-                </li>
-                <li class="{{activeRouteClass  'Bets'}}">
-                <a href="{{pathFor 'bestPosts'}}">Bets</a>
-                </li>
-                {{#if currentUser}}
-                    <li class="dropdown">
-                      {{> notifications}}
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{pathFor 'home'}}">Debate Bar</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="nav navbar-nav">
+                    <li class="{{activeRouteClass 'home' 'Topics'}}">
+                    <a href="{{pathFor 'newTopics'}}">Topics</a>
                     </li>
-                {{/if}}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {{> loginButtons}}
-            </ul>
+                    <li class="{{activeRouteClass  'Debates'}}">
+                    <a href="{{pathFor 'newDebates'}}">Debates</a>
+                    </li>
+                    <li class="{{activeRouteClass  'Predictions'}}">
+                    <a href="{{pathFor 'newPredictions'}}">Predictions</a>
+                    </li>
+                    <li class="{{activeRouteClass  'Bets'}}">
+                    <a href="{{pathFor 'newBets'}}">Bets</a>
+                    </li>
+                    {{#if currentUser}}
+                        <li class="dropdown">
+                          {{> notifications}}
+                        </li>
+                    {{/if}}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {{> loginButtons}}
+                </ul>
+            </div>
         </div>
-      </div>
-    {{#if needSubNavbar}}
         <div class="collapse navbar-collapse sub-navbar">
             <ul class="nav navbar-nav">
                 <li class="{{activeRouteClass 'home' 'new'}}">
-                <a href="{{pathFor 'newPosts'}}">New</a>
+                <a href="{{pathFor 'newTopics'}}">New</a>
                 </li>
-                <li class="{{activeRouteClass  'best'}}">
-                <a href="{{pathFor 'bestPosts'}}">Hot</a>
+                <li class="{{activeRouteClass  'hot'}}">
+                <a href="{{pathFor 'hotTopics'}}">Hot</a>
                 </li>
                 <li class="{{activeRouteClass  'favorite'}}">
-                <a href="{{pathFor 'favoritePosts'}}">Favorite</a>
+                <a href="{{pathFor 'favoriteTopics'}}">Favorite</a>
                 </li>
             </ul>
         </div>
-    {{/if}}
     </nav>
 </template>

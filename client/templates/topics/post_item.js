@@ -71,7 +71,7 @@ Template.postItem.helpers({
 Template.postItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
-        Meteor.call('upvote', this._id);
+        Meteor.call('upvotePost', this._id);
     },
     'click .next-path': function(e, instance) {
         e.preventDefault();

@@ -16,18 +16,28 @@ Template.header.helpers({
     return active && 'active';
   },
   needSubNavbar: function() {
+    return false;
     //const instance = Template.instance();
     //var subNavbarOpen = instance.state.get('subNavbarOpen');
 
     var currentRouteName = Router.current().route.getName();
     console.log('jimvon currentRouteName: ' + currentRouteName);
 
-    if (currentRouteName === 'newPosts' || currentRouteName === 'bestPosts'
-        || currentRouteName === 'favoritePosts' || currentRouteName === 'home') {
+    if (currentRouteName === 'newTopics' || currentRouteName === 'bestTopics'
+        || currentRouteName === 'favoriteTopics' || currentRouteName === 'home')
         return true;
-    } else {
+    else
         return false;
-    }
+  },
+  pathForNew: function() {
+    var currentRouteName = Router.current().route.getName();
+    console.log('jimvon currentRouteName: ' + currentRouteName);
+
+    if (currentRouteName === 'newPosts' || currentRouteName === 'bestPosts'
+        || currentRouteName === 'favoritePosts' || currentRouteName === 'home')
+        return true;
+    else
+        return false;
   }
 });
 

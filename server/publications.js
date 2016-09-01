@@ -58,3 +58,11 @@ Meteor.publish('Meteor.users.userContext', function (userId) {
 
   return Meteor.users.find(userId, options);
 });
+
+Meteor.publish('debates', function(options) {
+    check(options, {
+        sort: Object,
+        limit: Number
+    });
+    return Debates.find({}, { sort: options.sort, limit: options.limit });
+});

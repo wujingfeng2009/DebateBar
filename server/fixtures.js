@@ -238,4 +238,17 @@ if (Posts.find().count() === 0) {
             votes: 0
         });
     }
+
+    for (var i = 0; i < 10; i++) {
+        Debates.insert({
+            title: 'Test debate #' + i,
+            author: sacha.profile.name,
+            userId: sacha._id,
+            url: 'http://google.com/?q=test-' + i,
+            submitted: new Date(now - i * 3600 * 1000),
+            commentsCount: 0,
+            upvoters: [],
+            votes: 0
+        });
+    }
 }
