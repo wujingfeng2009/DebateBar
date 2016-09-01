@@ -12,14 +12,17 @@
         </div>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="nav navbar-nav">
-                <li class="{{activeRouteClass 'home' 'newPosts'}}">
-                <a href="{{pathFor 'newPosts'}}">New</a>
+                <li class="{{activeRouteClass 'home' 'Posts'}}">
+                <a href="{{pathFor 'newPosts'}}">Topics</a>
                 </li>
-                <li class="{{activeRouteClass  'bestPosts'}}">
-                <a href="{{pathFor 'bestPosts'}}">Best</a>
+                <li class="{{activeRouteClass  'Debates'}}">
+                <a href="{{pathFor 'bestPosts'}}">Debates</a>
                 </li>
-                <li class="{{activeRouteClass  'bestPosts'}}">
-                <a href="{{pathFor 'bestPosts'}}">Favorite</a>
+                <li class="{{activeRouteClass  'Predictions'}}">
+                <a href="{{pathFor 'bestPosts'}}">Predictions</a>
+                </li>
+                <li class="{{activeRouteClass  'Bets'}}">
+                <a href="{{pathFor 'bestPosts'}}">Bets</a>
                 </li>
                 {{#if currentUser}}
                     <li class="dropdown">
@@ -35,17 +38,14 @@
     {{#if needSubNavbar}}
         <div class="collapse navbar-collapse sub-navbar">
             <ul class="nav navbar-nav">
-                <li class="{{activeRouteClass 'home' 'newPosts'}}">
-                <a href="{{pathFor 'newPosts'}}">Topics</a>
+                <li class="{{activeRouteClass 'home' 'new'}}">
+                <a href="{{pathFor 'newPosts'}}">New</a>
                 </li>
-                <li class="{{activeRouteClass  'bestPosts'}}">
-                <a href="{{pathFor 'bestPosts'}}">Debates</a>
+                <li class="{{activeRouteClass  'best'}}">
+                <a href="{{pathFor 'bestPosts'}}">Hot</a>
                 </li>
-                <li class="{{activeRouteClass  'bestPosts'}}">
-                <a href="{{pathFor 'bestPosts'}}">Predictions</a>
-                </li>
-                <li class="{{activeRouteClass  'bestPosts'}}">
-                <a href="{{pathFor 'bestPosts'}}">Bets</a>
+                <li class="{{activeRouteClass  'favorite'}}">
+                <a href="{{pathFor 'favoritePosts'}}">Favorite</a>
                 </li>
             </ul>
         </div>
