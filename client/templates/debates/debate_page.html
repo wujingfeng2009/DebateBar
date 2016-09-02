@@ -1,0 +1,15 @@
+<template name="debatePage">
+    {{> debateItem}}
+    {{#if currentUser}}
+        {{> commentSubmit }}
+    {{else}}
+        <div>Please log in to leave a comment.</div>
+    {{/if}}
+    <div class="comments">
+    {{#each com in comments}}
+                {{> commentItem comment = com needAlign = false}}
+    {{/each}}
+    </div>
+</template>
+
+

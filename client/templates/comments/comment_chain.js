@@ -58,6 +58,27 @@ Template.commentChain.helpers({
         return this.chainComment.side === 0 ? 1 : 0;
     },
     parentPost: function() {
-        return Posts.findOne(this.chainComment.postId);
+        if (this.chainComment.postType === 0)
+            return Posts.findOne(this.chainComment.postId);
+        else if (this.chainComment.postType === 1)
+            return Debates.findOne(this.chainComment.postId);
+        else if (this.chainComment.postType === 2)
+            return Debates.findOne(this.chainComment.postId);
+        else if (this.chainComment.postType === 3)
+            return Debates.findOne(this.chainComment.postId);
+
+        throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
+    },
+    getTemplate: function() {
+        if (this.chainComment.postType === 0)
+            return 'postItem';
+        else if (this.chainComment.postType === 1)
+            return 'debateItem';
+        else if (this.chainComment.postType === 2)
+            return 'debateItem';
+        else if (this.chainComment.postType === 3)
+            return 'debateItem';
+
+        throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
     }
 });

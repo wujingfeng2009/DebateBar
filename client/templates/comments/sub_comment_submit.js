@@ -15,11 +15,15 @@ Template.commentSubmitEmbedded.events({
     'submit form': function(e, template) {
         e.preventDefault();
 
+        if (template.data.comment.postType < 0 || template.data.comment.postType > 3)
+            throw new Meteor.Error('invalid-comment', 'Your comment have a invalid postType[' + template.data.comment.postType + '].');
+
         var $body = $(e.target).find('[name=body]');
         var comm = {
             body: $body.val(),
             chainHeadId: template.data.comment.chainHeadId,
             parentId: template.data.comment._id,
+            postType: template.data.comment.postType,
             postId: template.data.comment.postId,
             side: template.data.comment.side === 0 ? 1 : 0,
         };

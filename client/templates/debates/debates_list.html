@@ -1,12 +1,12 @@
 <template name="debatesList">
     <div class="posts page">
         {{#if currentUser}}
-            {{> postSubmit }}
+            {{> debateSubmit }}
         {{else}}
             <div>Please log in to leave a post.</div>
         {{/if}}
         <div class="wrapper">
-            {{#each debates}} {{> postItem}} {{/each}}
+            {{#each debates}} {{> debateItem}} {{/each}}
         </div>
         {{#if nextRouterPath}}
         <a class="load-more" href="{{nextRouterPath}}">Load more</a> {{else}} {{#unless ready}} {{> spinner}} {{/unless}} {{/if}}

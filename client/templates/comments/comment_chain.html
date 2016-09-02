@@ -1,5 +1,5 @@
 <template name="commentChain">
-    {{#with parentPost}} {{> postItem}} {{/with}}
+    {{> Template.dynamic template=getTemplate data=parentPost }}
         <div class="comments ">
             {{#each com in commentsList}}
                 {{> commentItem comment = com needAlign = true}}

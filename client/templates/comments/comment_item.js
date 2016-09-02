@@ -22,18 +22,38 @@ Template.commentItem.helpers({
             if (lastChainCommentId === this.comment._id) {
                 if (this.comment.parentId !== '')
                     return Router.routes.commentChain.path({ _id: this.comment.parentId});
-                else
-                    return Router.routes.topicPage.path({ _id: this.comment.postId});
+                else {
+                    if (this.comment.postType === 0)
+                        return Router.routes.topicPage.path({ _id: this.comment.postId});
+                    else if (this.comment.postType === 1)
+                        return Router.routes.debatePage.path({ _id: this.comment.postId});
+                    else if (this.comment.postType === 2)
+                        return Router.routes.debatePage.path({ _id: this.comment.postId});
+                    else if (this.comment.postType === 3)
+                        return Router.routes.debatePage.path({ _id: this.comment.postId});
+                    else
+                        throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
+                }
             }
-            return Router.routes.commentChain.path({ _id: this.comment._id});
+            else
+                return Router.routes.commentChain.path({ _id: this.comment._id});
         }
-
+        // commentThreadMode
         if (lastThreadCommentId) {
             if (this.comment.parentId !== '')
                 return Router.routes.commentChain.path({ _id: this.comment.parentId});
-            else {
-                return Router.routes.topicPage.path({ _id: this.comment.postId});
-            }
+            else  {
+                if (this.comment.postType === 0)
+                    return Router.routes.topicPage.path({ _id: this.comment.postId});
+                else if (this.comment.postType === 1)
+                    return Router.routes.debatePage.path({ _id: this.comment.postId});
+                else if (this.comment.postType === 2)
+                    return Router.routes.debatePage.path({ _id: this.comment.postId});
+                else if (this.comment.postType === 3)
+                    return Router.routes.debatePage.path({ _id: this.comment.postId});
+                else
+                    throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
+                }
         }
 
         if (lastChainCommentId) {
@@ -73,7 +93,7 @@ Template.commentItem.helpers({
         return '';
     },
     alignment: function() {
-        console.log("needAlign: " + this.needAlign+ ", align side: " + this.comment.side);
+        //console.log("needAlign: " + this.needAlign+ ", align side: " + this.comment.side);
         if (this.needAlign) {
             if (this.comment.side === 0)
                 return 'alignLeft';
@@ -132,7 +152,7 @@ Template.commentItem.events({
             Meteor.call('commentRemove', this.comment._id);
             if (this.comment.parentId === '') {
                 var nextPath = Router.routes.topicPage.path({ _id: this.comment.postId });
-                Router.go(nextPath);
+                //Router.go(nextPath);
             }
             //Router.go('home');
         }

@@ -12,7 +12,7 @@ Meteor.publish('singlePost', function(id) {
     return Posts.find(id);
 });
 
-Meteor.publish('comments', function(postId) {
+Meteor.publish('postComments', function(postId) {
     check(postId, String);
     return Comments.find({ postId: postId });
 });
@@ -30,18 +30,29 @@ Meteor.publish('commentsTree', function(commentId) {
         return null;
     }
     console.log('comment parent post Id: ' + comment.postId + '!');
-    return Comments.find({ postId: comment.postId});
+    return Comments.find({ postId: comment.postId, postType: comment.postType});
 });
 
 Meteor.publish('commentParentPost', function(commentId) {
     check(commentId, String);
+
     var comment = Comments.findOne(commentId);
     if (!comment) {
         console.log('can not find comment from comment Id: ' + commentId + '!');
         return null;
     }
     console.log('comment parent post Id: ' + comment.postId + '!');
-    return Posts.find(comment.postId);
+
+    if (comment.postType === 0)
+        return Posts.find(comment.postId);
+    else if (comment.postType === 1)
+        return Debates.find(comment.postId);
+    else if (comment.postType === 2)
+        return Debates.find(comment.postId);
+    else if (comment.postType === 3)
+        return Debates.find(comment.postId);
+
+    throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
 });
 
 Meteor.publish('notifications', function() {
@@ -65,4 +76,10 @@ Meteor.publish('debates', function(options) {
         limit: Number
     });
     return Debates.find({}, { sort: options.sort, limit: options.limit });
+});
+
+Meteor.publish('singleDebate', function(id) {
+    check(id, String)
+    console.log('single post Id: ' + id + '!');
+    return Debates.find(id);
 });

@@ -25,8 +25,9 @@ if (Posts.find().count() === 0) {
     Comments.insert({
         chainHeadId: '',
         parentId: '',
+        postType: 0, // topic, debate, prediction and bet
         postId: telescopeId,
-        side: 0,
+        side: 0, // left or right
         childCount: 0,
         childTotal: 0,
         userId: tom._id,
@@ -38,6 +39,7 @@ if (Posts.find().count() === 0) {
     var telescopeComHeadId = Comments.insert({
         chainHeadId: '',
         parentId: '',
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 3,
@@ -51,6 +53,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_1 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComHeadId,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 3,
@@ -64,6 +67,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComHeadId,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 3,
@@ -77,6 +81,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_3 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComHeadId,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 0,
@@ -90,6 +95,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_1_1 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_1,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 0,
@@ -103,6 +109,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_1_2 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_1,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 0,
@@ -116,6 +123,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_1_3 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_1,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 0,
@@ -129,6 +137,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_1 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 3,
@@ -142,6 +151,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_2 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 0,
@@ -155,6 +165,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_3 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2,
+        postType: 0,
         postId: telescopeId,
         side: 0,
         childCount: 0,
@@ -168,6 +179,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_1_1 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2_1,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 0,
@@ -181,6 +193,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_1_2 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2_1,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 0,
@@ -194,6 +207,7 @@ if (Posts.find().count() === 0) {
     var telescopeComId1_2_1_3 = Comments.insert({
         chainHeadId: telescopeComHeadId,
         parentId: telescopeComId1_2_1,
+        postType: 0,
         postId: telescopeId,
         side: 1,
         childCount: 0,
