@@ -65,7 +65,7 @@ Template.commentChain.helpers({
     },
     getTemplate: function() {
         if (this.chainComment.postType === 0)
-            return 'postItem';
+            return 'topicItem';
         else if (this.chainComment.postType === 1)
             return 'debateItem';
         else if (this.chainComment.postType === 2)

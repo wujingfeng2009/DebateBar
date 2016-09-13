@@ -1,4 +1,4 @@
-Template.postSubmit.events({
+Template.topicSubmit.events({
     'submit form': function(e) {
         e.preventDefault();
 /*
@@ -27,7 +27,7 @@ Template.postSubmit.events({
 
         var errors = validatePost(topic);
         if (errors.title || errors.url)
-            return Session.set('postSubmitErrors', errors);
+            return Session.set('topicSubmitErrors', errors);
 
         Meteor.call('postInsert', topic, function(error, result) {
             // 显示错误信息并退出
@@ -44,15 +44,15 @@ Template.postSubmit.events({
     }
 });
 
-Template.postSubmit.onCreated(function() {
-    Session.set('postSubmitErrors', {});
+Template.topicSubmit.onCreated(function() {
+    Session.set('topicSubmitErrors', {});
 });
 
-Template.postSubmit.helpers({
+Template.topicSubmit.helpers({
     errorMessage: function(field) {
-        return Session.get('postSubmitErrors')[field];
+        return Session.get('topicSubmitErrors')[field];
     },
     errorClass: function(field) {
-        return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+        return !!Session.get('topicSubmitErrors')[field] ? 'has-error' : '';
     }
 });

@@ -1,4 +1,4 @@
-<template name="postItem">
+<template name="topicItem">
     <div class="post">
         <a href="#" class="upvote btn btn-default {{upvotedClass}}">⬆</a>
         <div class="post-content">
@@ -16,7 +16,7 @@
         </div>
         <a href="#" class="discuss btn btn-default next-path" >{{navigateText}}</a>
         {{#if needEdit}}
-            {{> postEdit }}
+            {{> topicEdit }}
         {{/if}}
         <!--  <a href="{{nextRoutePath}}" class="discuss btn btn-default">{{navigateText}}</a>  -->
     </div>

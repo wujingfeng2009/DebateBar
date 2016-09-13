@@ -1,4 +1,4 @@
-Template.postItem.onCreated( function () {
+Template.topicItem.onCreated( function () {
     this.state = new ReactiveDict();
     this.state.setDefault({
     editFormOpen: false,
@@ -6,7 +6,7 @@ Template.postItem.onCreated( function () {
     });
 });
 
-Template.postItem.helpers({
+Template.topicItem.helpers({
     ownPost: function() {
         return this.userId === Meteor.userId();
     },
@@ -43,7 +43,7 @@ Template.postItem.helpers({
     }
 });
 
-Template.postItem.events({
+Template.topicItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
         Meteor.call('upvotePost', this._id);
