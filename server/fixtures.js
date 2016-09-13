@@ -13,6 +13,7 @@ if (Posts.find().count() === 0) {
 
     var telescopeId = Posts.insert({
         title: 'Introducing Telescope',
+        postType: 0, // topic: 0, debate: 1, prediction: 2 and bet: 3
         userId: sacha._id,
         author: sacha.profile.name,
         url: 'http://sachagreif.com/introducing-telescope/',
@@ -220,6 +221,7 @@ if (Posts.find().count() === 0) {
 
     Posts.insert({
         title: 'Meteor',
+        postType: 0,
         userId: tom._id,
         author: tom.profile.name,
         url: 'http://meteor.com',
@@ -231,6 +233,7 @@ if (Posts.find().count() === 0) {
 
     Posts.insert({
         title: 'The Meteor Book',
+        postType: 0,
         userId: tom._id,
         author: tom.profile.name,
         url: 'http://themeteorbook.com',
@@ -244,6 +247,7 @@ if (Posts.find().count() === 0) {
         Posts.insert({
             title: 'Test post #' + i,
             author: sacha.profile.name,
+            postType: 0,
             userId: sacha._id,
             url: 'http://google.com/?q=test-' + i,
             submitted: new Date(now - i * 3600 * 1000),
@@ -253,10 +257,12 @@ if (Posts.find().count() === 0) {
         });
     }
 
+/* debates */
     for (var i = 0; i < 10; i++) {
-        Debates.insert({
+        Posts.insert({
             title: 'Test debate #' + i,
             author: sacha.profile.name,
+            postType: 1,
             userId: sacha._id,
             url: 'http://google.com/?q=test-' + i,
             submitted: new Date(now - i * 3600 * 1000),

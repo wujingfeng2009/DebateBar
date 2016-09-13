@@ -102,7 +102,7 @@ Template.debateItem.events({
 
         if (confirm("Delete this debate?")) {
             var currentDebateId = instance.data._id;
-            Debates.remove(currentDebateId);
+            Posts.remove(currentDebateId);
             //Router.go('home');
         }
     }

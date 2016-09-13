@@ -1,19 +1,35 @@
 Template.postSubmit.events({
     'submit form': function(e) {
         e.preventDefault();
+/*
+        var currentRouteName = Router.current().route.getName();
+        console.log('jimvon submit comment, currentRouteName: ' + currentRouteName);
+        var postType = -1;
+        if (currentRouteName.indexOf('Topics') >= 0 || currentRouteName.indexOf('home') >= 0)
+            postType = 0;
+        else if (currentRouteName.indexOf('Debates') >= 0)
+            postType = 1;
+        else if (currentRouteName.indexOf('Predictions') >= 0)
+            postType = 2;
+        else if (currentRouteName.indexOf('Bets') >= 0)
+            postType = 3;
 
+        if (postType < 0 || postType > 3)
+            throw new Meteor.Error('invalid-post', 'Your post have a invalid postType[' + postType + '].');
+*/
         var $urlString = $(e.target).find('[name=url]');
         var $titleString = $(e.target).find('[name=title]');
-        var post = {
+        var topic = {
             url: $urlString.val(),
-            title: $titleString.val()
+            title: $titleString.val(),
+            postType: 0
         };
 
-        var errors = validatePost(post);
+        var errors = validatePost(topic);
         if (errors.title || errors.url)
             return Session.set('postSubmitErrors', errors);
 
-        Meteor.call('postInsert', post, function(error, result) {
+        Meteor.call('postInsert', topic, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);
@@ -23,7 +39,7 @@ Template.postSubmit.events({
             $urlString.val('');
             $titleString.val('');
 
-            Router.go('home');
+            //Router.go('home');
         });
     }
 });

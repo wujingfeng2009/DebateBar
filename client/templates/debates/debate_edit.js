@@ -28,12 +28,12 @@ Template.debateEdit.events({
 
         console.log('debates submit, currentDebateId: ' + currentDebateId + ', debateProperties: {url: ' + debateProperties.url + ', title: ' + debateProperties.title + '}');
 
-        Meteor.call('debateUpdate', currentDebateId, debateProperties, function(error, result) {
+        Meteor.call('postUpdate', currentDebateId, debateProperties, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);
             // 显示结果，跳转页面
-            if (result.debateIdNotExists)
+            if (result.postIdNotExists)
                 throwError('current DebateId[' + currentDebateId + '] does not exist!');
             else if (result.updateNotAllowed) {
                 throwError('current user is not allowed to update current debate[' + currentDebateId + ']!');

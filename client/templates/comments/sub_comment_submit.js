@@ -16,7 +16,7 @@ Template.subCommentSubmit.events({
         e.preventDefault();
 
         if (template.data.comment.postType < 0 || template.data.comment.postType > 3)
-            throw new Meteor.Error('invalid-comment', 'Your comment have a invalid postType[' + template.data.comment.postType + '].');
+            throw new Meteor.Error('invalid-comment', 'parent comment have a invalid postType[' + template.data.comment.postType + '].');
 
         var $body = $(e.target).find('[name=body]');
         var comm = {

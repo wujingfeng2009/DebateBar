@@ -1,7 +1,7 @@
 Template.commentChain.helpers({
     childComments: function() {
         //console.log('parent comment Id: ' + this.chainComment._id + '!');
-        return Comments.find({ parentId: this.chainComment._id }, {sort: { childTotal: -1, submitted: -1 }});
+        return Comments.find({ parentId: this.chainComment._id, postType: this.chainComment.postType }, {sort: { childTotal: -1, submitted: -1 }});
     },
     commentsList: function() {
         var context = new Array();
@@ -10,7 +10,7 @@ Template.commentChain.helpers({
 
         var showSiblingsMode = Session.get('showSiblingsMode');
         var parent = this.chainComment;
-        var hasChild = Comments.find({ parentId: parent._id }, {sort: { childTotal: -1, submitted: -1}}).count() && true;
+        var hasChild = Comments.find({ parentId: parent._id, postType: parent.postType }, {sort: { childTotal: -1, submitted: -1}}).count() && true;
         while (parent) {
             //console.log('push parent[' + parent._id + ']: ' + parent.body);
             if (parent._id === this.chainComment._id) {
@@ -24,7 +24,7 @@ Template.commentChain.helpers({
                 break;
 
             if (showSiblingsMode) {
-                var siblingsArray = Comments.find({ parentId: parent.parentId }, {sort: { childTotal: -1, submitted: -1} }).fetch();
+                var siblingsArray = Comments.find({ parentId: parent.parentId, postType: parent.postType }, {sort: { childTotal: -1, submitted: -1} }).fetch();
                 if (siblingsArray && siblingsArray.length > 0) {
                     //console.log("siblingsArray lenght: " + siblingsArray.length);
                     var parentIndex = siblingsArray.findIndex( function (sibling, index, array) {
@@ -47,7 +47,7 @@ Template.commentChain.helpers({
                 }
             }
 
-            parent = Comments.findOne(parent.parentId);
+            parent = Comments.findOne({_id: parent.parentId, postType: parent.postType });
         }
 
         context.reverse();
@@ -58,16 +58,10 @@ Template.commentChain.helpers({
         return this.chainComment.side === 0 ? 1 : 0;
     },
     parentPost: function() {
-        if (this.chainComment.postType === 0)
-            return Posts.findOne(this.chainComment.postId);
-        else if (this.chainComment.postType === 1)
-            return Debates.findOne(this.chainComment.postId);
-        else if (this.chainComment.postType === 2)
-            return Debates.findOne(this.chainComment.postId);
-        else if (this.chainComment.postType === 3)
-            return Debates.findOne(this.chainComment.postId);
-
-        throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
+        var parentPost = Posts.findOne(this.chainComment.postId);
+        if (!parentPost || parentPost.postType !== this.chainComment.postType)
+            throw new Meteor.Error('invalid-parentPost', 'comment must have the same postType as its parent Post has!');
+        return parentPost;
     },
     getTemplate: function() {
         if (this.chainComment.postType === 0)

@@ -13,12 +13,12 @@ Template.debateSubmit.events({
         if (errors.title || errors.url)
             return Session.set('debateSubmitErrors', errors);
 
-        Meteor.call('debateInsert', debate, function(error, result) {
+        Meteor.call('postInsert', debate, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);
             // 显示结果，跳转页面
-            if (result.debateExists)
+            if (result.postExists)
                 throwError('This link has already been posted（该链接已经存在）');
             $urlString.val('');
             $titleString.val('');

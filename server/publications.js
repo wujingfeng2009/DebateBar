@@ -1,15 +1,23 @@
-Meteor.publish('posts', function(options) {
+Meteor.publish('topics', function(options) {
     check(options, {
         sort: Object,
         limit: Number
     });
-    return Posts.find({}, { sort: options.sort, limit: options.limit });
+    return Posts.find({postType: 0}, { sort: options.sort, limit: options.limit });
 });
 
-Meteor.publish('singlePost', function(id) {
-    check(id, String)
-    console.log('single post Id: ' + id + '!');
-    return Posts.find(id);
+Meteor.publish('singleTopic', function(topicId) {
+    check(topicId, String)
+    console.log('single topic Id: ' + topicId + '!');
+    var posts = Posts.find({_id: topicId, postType: 0});
+    if (posts.count() === 0) {
+        console.log('[publish-failed]', 'can not find any SingleTopic[' + topicId + ']!');
+        return null;
+    } else if (posts.count() > 1) {
+        console.log('[publish-failed]', 'find more than one SingleTopic[' + topicId + '], that is impossible!');
+        return null;
+    }
+    return posts;
 });
 
 Meteor.publish('postComments', function(postId) {
@@ -26,33 +34,24 @@ Meteor.publish('commentsTree', function(commentId) {
     check(commentId, String);
     var comment = Comments.findOne(commentId);
     if (!comment) {
-        console.log('can not find comment from comment Id: ' + commentId + '!');
+        console.log('[publish-failed]', 'can not find comment by comment Id: ' + commentId + '!');
         return null;
     }
-    console.log('comment parent post Id: ' + comment.postId + '!');
+    console.log('comment post Id: ' + comment.postId + '!');
     return Comments.find({ postId: comment.postId, postType: comment.postType});
 });
 
-Meteor.publish('commentParentPost', function(commentId) {
+Meteor.publish('commentPost', function(commentId) {
     check(commentId, String);
 
     var comment = Comments.findOne(commentId);
     if (!comment) {
-        console.log('can not find comment from comment Id: ' + commentId + '!');
+        console.log('can not find comment by comment Id: ' + commentId + '!');
         return null;
     }
-    console.log('comment parent post Id: ' + comment.postId + '!');
+    console.log('comment post Id: ' + comment.postId + '!');
 
-    if (comment.postType === 0)
-        return Posts.find(comment.postId);
-    else if (comment.postType === 1)
-        return Debates.find(comment.postId);
-    else if (comment.postType === 2)
-        return Debates.find(comment.postId);
-    else if (comment.postType === 3)
-        return Debates.find(comment.postId);
-
-    throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
+    return Posts.find({ _id: comment.postId, postType: comment.postType});
 });
 
 Meteor.publish('notifications', function() {
@@ -75,11 +74,11 @@ Meteor.publish('debates', function(options) {
         sort: Object,
         limit: Number
     });
-    return Debates.find({}, { sort: options.sort, limit: options.limit });
+    return Posts.find({postType: 1}, { sort: options.sort, limit: options.limit });
 });
 
-Meteor.publish('singleDebate', function(id) {
-    check(id, String)
-    console.log('single post Id: ' + id + '!');
-    return Debates.find(id);
+Meteor.publish('singleDebate', function(debateId) {
+    check(debateId, String)
+    console.log('single debate Id: ' + debateId + '!');
+    return Posts.find({_id: debateId, postType: 1});
 });

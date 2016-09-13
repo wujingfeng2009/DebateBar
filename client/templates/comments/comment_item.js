@@ -17,8 +17,6 @@ Template.commentItem.helpers({
         var lastThreadCommentId = Session.get('lastThreadCommentId');
         //console.log("jimvon in commentChainPath, lastChainCommentId: " + lastChainCommentId);
         if (!commentThreadMode) {
-            if (this.comment.childCount === 0)
-                return '#';
             if (lastChainCommentId === this.comment._id) {
                 if (this.comment.parentId !== '')
                     return Router.routes.commentChain.path({ _id: this.comment.parentId});
@@ -35,8 +33,12 @@ Template.commentItem.helpers({
                         throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
                 }
             }
-            else
-                return Router.routes.commentChain.path({ _id: this.comment._id});
+            else {
+                if (this.comment.childCount === 0)
+                    return '#';
+                else
+                    return Router.routes.commentChain.path({ _id: this.comment._id});
+            }
         }
         // commentThreadMode
         if (lastThreadCommentId) {
@@ -147,14 +149,29 @@ Template.commentItem.events({
         }
 
         if (confirm("Delete this comment?")) {
+            var nextPath = null;
+            var lastChainCommentId = Session.get('lastChainCommentId');
+            if (this.comment.parentId === '') {
+                if (this.comment.postType === 0)
+                    nextPath = Router.routes.topicPage.path({ _id: this.comment.postId });
+                else if (this.comment.postType === 1)
+                    nextPath = Router.routes.debatePage.path({ _id: this.comment.postId });
+                else if (this.comment.postType === 2)
+                    nextPath = Router.routes.debatePage.path({ _id: this.comment.postId});
+                else if (this.comment.postType === 3)
+                    nextPath = Router.routes.debatePage.path({ _id: this.comment.postId});
+                else
+                    throw new Meteor.Error('invalid-comment', 'comment with a valid postType!');
+            } else if (lastChainCommentId && lastChainCommentId === this.comment._id) {
+                nextPath = Router.routes.commentChain.path({ _id: this.comment.parentId});
+            }
+
+            if (nextPath)
+                Router.go(nextPath);
 
             //Comments.remove(this.comment._id);
             Meteor.call('commentRemove', this.comment._id);
-            if (this.comment.parentId === '') {
-                var nextPath = Router.routes.topicPage.path({ _id: this.comment.postId });
-                //Router.go(nextPath);
-            }
-            //Router.go('home');
+
         }
     }
 });
