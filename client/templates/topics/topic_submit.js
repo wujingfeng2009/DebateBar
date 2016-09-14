@@ -25,7 +25,7 @@ Template.topicSubmit.events({
             postType: 0
         };
 
-        var errors = validatePost(topic);
+        var errors = validateTopic(topic);
         if (errors.title || errors.url)
             return Session.set('topicSubmitErrors', errors);
 

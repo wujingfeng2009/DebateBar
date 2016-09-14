@@ -19,7 +19,8 @@ Template.debateEdit.events({
 
         var debateProperties = {
             url: $(e.target).find('[name=url]').val(),
-            title: $(e.target).find('[name=title]').val()
+            title: $(e.target).find('[name=title]').val(),
+            postType: 1
         }
 
         var errors = validateDebate(debateProperties);

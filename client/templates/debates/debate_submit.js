@@ -6,7 +6,8 @@ Template.debateSubmit.events({
         var $titleString = $(e.target).find('[name=title]');
         var debate = {
             url: $urlString.val(),
-            title: $titleString.val()
+            title: $titleString.val(),
+            postType: 1
         };
 
         var errors = validateDebate(debate);

@@ -19,7 +19,8 @@ Template.topicEdit.events({
 
         var topicProperties = {
             url: $(e.target).find('[name=url]').val(),
-            title: $(e.target).find('[name=title]').val()
+            title: $(e.target).find('[name=title]').val(),
+            postType: 0
         }
 
         var errors = validateTopic(topicProperties);
