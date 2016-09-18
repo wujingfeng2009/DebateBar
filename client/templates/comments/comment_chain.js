@@ -69,9 +69,9 @@ Template.commentChain.helpers({
         else if (this.chainComment.postType === 1)
             return 'debateItem';
         else if (this.chainComment.postType === 2)
-            return 'debateItem';
+            return 'predictionItem';
         else if (this.chainComment.postType === 3)
-            return 'debateItem';
+            return 'betItem';
 
         throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
     }

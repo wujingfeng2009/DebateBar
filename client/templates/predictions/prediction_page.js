@@ -1,4 +1,4 @@
-Template.debatePage.helpers({
+Template.predictionPage.helpers({
     comments: function() {
         //Session.set('lastChainCommentId', '');
         //Session.set('lastThreadCommentId', '');

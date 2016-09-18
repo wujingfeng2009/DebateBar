@@ -1,22 +1,22 @@
-<template name="debateItem">
+<template name="predictionItem">
     <div class="post">
         <a href="#" class="upvote btn btn-default {{upvotedClass}}">⬆</a>
         <div class="post-content">
             <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
             <p>
                 {{pluralize votes "Vote"}}, submitted by {{author}},
-                <a href="{{pathFor 'debatePage'}}">{{commentsCount}} comments</a>
-                {{#if ownDebate}}
+                <a href="{{pathFor 'predictionPage'}}">{{commentsCount}} comments</a>
+                {{#if ownPrediction}}
                     <a href='#' class='edit-toggle'>Edit</a>
                 {{/if}}
                 {{#if canDelete}}
-                    <a href='#' class='delete-debate'>Delete</a>
+                    <a href='#' class='delete-prediction'>Delete</a>
                 {{/if}}
             </p>
         </div>
         <a href="#" class="discuss btn btn-default next-path" >{{navigateText}}</a>
         {{#if needEdit}}
-            {{> debateEdit }}
+            {{> predictionEdit }}
         {{/if}}
     </div>
 </template>

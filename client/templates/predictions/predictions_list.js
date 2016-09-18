@@ -1,12 +1,4 @@
-/*
-Template.debatesList.helpers({
-    debates: function() {
-        return Debates.find({}, { sort: { submitted: -1 } });
-    }
-});
-*/
-
-Template.debatesList.onRendered(function() {
+Template.predictionsList.onRendered(function() {
     var animationMode = Session.get('animationMode');
     if (animationMode) {
         this.find('.wrapper')._uihooks = {

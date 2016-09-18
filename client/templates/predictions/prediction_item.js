@@ -1,4 +1,4 @@
-Template.debateItem.onCreated( function () {
+Template.predictionItem.onCreated( function () {
     this.state = new ReactiveDict();
     this.state.setDefault({
     editFormOpen: false,
@@ -6,8 +6,8 @@ Template.debateItem.onCreated( function () {
     });
 });
 
-Template.debateItem.helpers({
-    ownDebate: function() {
+Template.predictionItem.helpers({
+    ownPrediction: function() {
         return this.userId === Meteor.userId();
     },
     canDelete: function() {
@@ -33,7 +33,7 @@ Template.debateItem.helpers({
     navigateText: function() {
         var currentRouteName = Router.current().route.getName();
 
-        if (currentRouteName === 'debatePage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
+        if (currentRouteName === 'predictionPage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
             return 'Back';
         return 'Discuss';
     },
@@ -43,7 +43,7 @@ Template.debateItem.helpers({
     }
 });
 
-Template.debateItem.events({
+Template.predictionItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
         Meteor.call('upvoteDebate', this._id);
@@ -54,33 +54,33 @@ Template.debateItem.events({
         var currentRouteName = Router.current().route.getName();
         console.log('jimvon currentRouteName: ' + currentRouteName);
 
-        var lastDebatesListPath = Session.get('lastDebatesListPath');
-        console.log('jimvon Session.lastDebatesListPath: ' + lastDebatesListPath);
+        var lastPredictionsListPath = Session.get('lastPredictionsListPath');
+        console.log('jimvon Session.lastPredictionsListPath: ' + lastPredictionsListPath);
 
-        if (lastDebatesListPath && lastDebatesListPath !== '') {
-            if (currentRouteName === 'debatePage') {
-                Router.go(lastDebatesListPath);
+        if (lastPredictionsListPath && lastPredictionsListPath !== '') {
+            if (currentRouteName === 'predictionPage') {
+                Router.go(lastPredictionsListPath);
                 return;
             } else {
-                Router.go(Router.routes.debatePage.path({ _id: this._id }));
+                Router.go(Router.routes.predictionPage.path({ _id: this._id }));
                 return;
             }
         }
 
         var nextPath = '';
         if (Meteor.userId() && Meteor.userId() !== '') {
-            if (currentRouteName === 'debatePage') {
-                if (Meteor.user().userContext && Meteor.user().userContext.lastDebatesListPath !== '')
-                    nextPath = Meteor.user().userContext.lastDebatesListPath;
+            if (currentRouteName === 'predictionPage') {
+                if (Meteor.user().userContext && Meteor.user().userContext.lastPredictionsListPath !== '')
+                    nextPath = Meteor.user().userContext.lastPredictionsListPath;
                 else
                     nextPath = '/';
             } else
-                nextPath = Router.routes.debatePage.path({ _id: this._id });
+                nextPath = Router.routes.predictionPage.path({ _id: this._id });
         } else {
-            if (currentRouteName === 'debatePage') {
+            if (currentRouteName === 'predictionPage') {
                     nextPath = '/';
             } else
-                nextPath = Router.routes.debatePage.path({ _id: this._id });
+                nextPath = Router.routes.predictionPage.path({ _id: this._id });
         }
 
         Router.go(nextPath);
@@ -89,20 +89,20 @@ Template.debateItem.events({
         instance.state.set('editFormOpen', !instance.state.get('editFormOpen'));
         e.preventDefault();
     },
-    'click .delete-debate': function(e, instance) {
+    'click .delete-prediction': function(e, instance) {
         e.preventDefault();
 
         if (instance.data.userId != Meteor.userId()) {
             throwError('invalid user, delete denied!');
             return;
         } else if (instance.data.commentsCount !== 0) {
-            throwError('can not delete a debate that have children, delete denied!');
+            throwError('can not delete a prediction that have children, delete denied!');
             return;
         }
 
-        if (confirm("Delete this debate?")) {
-            var currentDebateId = instance.data._id;
-            Posts.remove(currentDebateId);
+        if (confirm("Delete this prediction?")) {
+            var currentPredictionId = instance.data._id;
+            Posts.remove(currentPredictionId);
             //Router.go('home');
         }
     }

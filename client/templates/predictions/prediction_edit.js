@@ -1,43 +1,43 @@
-Template.debateEdit.onCreated(function() {
-    Session.set('debateEditErrors', {});
+Template.predictionEdit.onCreated(function() {
+    Session.set('predictionEditErrors', {});
 });
 
-Template.debateEdit.helpers({
+Template.predictionEdit.helpers({
     errorMessage: function(field) {
-        return Session.get('debateEditErrors')[field];
+        return Session.get('predictionEditErrors')[field];
     },
     errorClass: function(field) {
-        return !!Session.get('debateEditErrors')[field] ? 'has-error' : '';
+        return !!Session.get('predictionEditErrors')[field] ? 'has-error' : '';
     }
 });
 
-Template.debateEdit.events({
+Template.predictionEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
-        var currentDebateId = this._id;
+        var currentPredictionId = this._id;
 
-        var debateProperties = {
+        var predictionProperties = {
             url: $(e.target).find('[name=url]').val(),
             title: $(e.target).find('[name=title]').val(),
-            postType: 1
+            postType: 2
         }
 
-        var errors = validateDebate(debateProperties);
+        var errors = validatePrediction(predictionProperties);
         if (errors.title || errors.url)
-            return Session.set('debateEditErrors', errors);
+            return Session.set('predictionEditErrors', errors);
 
-        console.log('debates submit, currentDebateId: ' + currentDebateId + ', debateProperties: {url: ' + debateProperties.url + ', title: ' + debateProperties.title + '}');
+        console.log('predictions submit, currentPredictionId: ' + currentPredictionId + ', predictionProperties: {url: ' + predictionProperties.url + ', title: ' + predictionProperties.title + '}');
 
-        Meteor.call('postUpdate', currentDebateId, debateProperties, function(error, result) {
+        Meteor.call('postUpdate', currentPredictionId, predictionProperties, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);
             // 显示结果，跳转页面
             if (result.postIdNotExists)
-                throwError('current DebateId[' + currentDebateId + '] does not exist!');
+                throwError('currentPredictionId[' + currentPredictionId + '] does not exist!');
             else if (result.updateNotAllowed) {
-                throwError('current user is not allowed to update current debate[' + currentDebateId + ']!');
+                throwError('user is not allowed to update current prediction[' + currentPredictionId + ']!');
             }
 
             //Router.go(Meteor.user().userContext.lastDebatesListPath);

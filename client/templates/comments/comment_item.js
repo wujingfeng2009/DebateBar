@@ -26,9 +26,9 @@ Template.commentItem.helpers({
                     else if (this.comment.postType === 1)
                         return Router.routes.debatePage.path({ _id: this.comment.postId});
                     else if (this.comment.postType === 2)
-                        return Router.routes.debatePage.path({ _id: this.comment.postId});
+                        return Router.routes.predictionPage.path({ _id: this.comment.postId});
                     else if (this.comment.postType === 3)
-                        return Router.routes.debatePage.path({ _id: this.comment.postId});
+                        return Router.routes.betPage.path({ _id: this.comment.postId});
                     else
                         throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
                 }
@@ -50,9 +50,9 @@ Template.commentItem.helpers({
                 else if (this.comment.postType === 1)
                     return Router.routes.debatePage.path({ _id: this.comment.postId});
                 else if (this.comment.postType === 2)
-                    return Router.routes.debatePage.path({ _id: this.comment.postId});
+                    return Router.routes.predictionPage.path({ _id: this.comment.postId});
                 else if (this.comment.postType === 3)
-                    return Router.routes.debatePage.path({ _id: this.comment.postId});
+                    return Router.routes.betPage.path({ _id: this.comment.postId});
                 else
                     throw new Meteor.Error('invalid-comment', 'Your comment do not have a valid postType!');
                 }
@@ -157,9 +157,9 @@ Template.commentItem.events({
                 else if (this.comment.postType === 1)
                     nextPath = Router.routes.debatePage.path({ _id: this.comment.postId });
                 else if (this.comment.postType === 2)
-                    nextPath = Router.routes.debatePage.path({ _id: this.comment.postId});
+                    nextPath = Router.routes.predictionPage.path({ _id: this.comment.postId});
                 else if (this.comment.postType === 3)
-                    nextPath = Router.routes.debatePage.path({ _id: this.comment.postId});
+                    nextPath = Router.routes.betPage.path({ _id: this.comment.postId});
                 else
                     throw new Meteor.Error('invalid-comment', 'comment with a valid postType!');
             } else if (lastChainCommentId && lastChainCommentId === this.comment._id) {

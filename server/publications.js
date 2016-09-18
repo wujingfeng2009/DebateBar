@@ -69,6 +69,7 @@ Meteor.publish('Meteor.users.userContext', function (userId) {
   return Meteor.users.find(userId, options);
 });
 
+// debates
 Meteor.publish('debates', function(options) {
     check(options, {
         sort: Object,
@@ -81,4 +82,19 @@ Meteor.publish('singleDebate', function(debateId) {
     check(debateId, String)
     console.log('single debate Id: ' + debateId + '!');
     return Posts.find({_id: debateId, postType: 1});
+});
+
+// predictions
+Meteor.publish('predictions', function(options) {
+    check(options, {
+        sort: Object,
+        limit: Number
+    });
+    return Posts.find({postType: 2}, { sort: options.sort, limit: options.limit });
+});
+
+Meteor.publish('singlePrediction', function(predictionId) {
+    check(predictionId, String)
+    console.log('single prediction Id: ' + predictionId + '!');
+    return Posts.find({_id: predictionId, postType: 2});
 });

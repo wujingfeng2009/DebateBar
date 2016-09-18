@@ -1,21 +1,21 @@
-Template.debateSubmit.events({
+Template.predictionSubmit.events({
     'submit form': function(e) {
         e.preventDefault();
 
         var $urlString = $(e.target).find('[name=url]');
         var $titleString = $(e.target).find('[name=title]');
-        var debate = {
+        var prediction = {
             url: $urlString.val(),
             title: $titleString.val(),
-            postType: 1,
+            postType: 2,
             proposition: ''
         };
 
-        var errors = validateDebate(debate);
+        var errors = validatePrediction(prediction);
         if (errors.title || errors.url)
-            return Session.set('debateSubmitErrors', errors);
+            return Session.set('predictionSubmitErrors', errors);
 
-        Meteor.call('postInsert', debate, function(error, result) {
+        Meteor.call('postInsert', prediction, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);
@@ -30,15 +30,15 @@ Template.debateSubmit.events({
     }
 });
 
-Template.debateSubmit.onCreated(function() {
-    Session.set('debateSubmitErrors', {});
+Template.predictionSubmit.onCreated(function() {
+    Session.set('predictionSubmitErrors', {});
 });
 
-Template.debateSubmit.helpers({
+Template.predictionSubmit.helpers({
     errorMessage: function(field) {
-        return Session.get('debateSubmitErrors')[field];
+        return Session.get('predictionSubmitErrors')[field];
     },
     errorClass: function(field) {
-        return !!Session.get('debateSubmitErrors')[field] ? 'has-error' : '';
+        return !!Session.get('predictionSubmitErrors')[field] ? 'has-error' : '';
     }
 });
