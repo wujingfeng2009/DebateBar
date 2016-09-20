@@ -1,7 +1,7 @@
 <template name="debateItem">
     <div class="post">
         <a href="#" class="upvote btn btn-default {{upvotedClass}}">⬆</a>
-        <div class="post-content">
+        <div class="post-content debate">
             <h3>
                 {{#if hasUrl}}
                     <a href="{{url}}" class="proposition">{{proposition}}</a><span>{{domain}}</span>
@@ -9,7 +9,15 @@
                     <p class="proposition">{{proposition}}</p>
                 {{/if}}
             </h3>
-            <p>
+            <div class="debate-standpoints">
+                <p class="positive-standpoint">positive: &nbsp; {{positiveStandpoint}}</p>
+                <p class="negative-standpoint">{{negativeStandpoint}} &nbsp; :negative</p>
+            </div>
+            <div class="debate-standpoints">
+                <p class="positive-percentage">&nbsp;</p>
+                <p class="negative-percentage">&nbsp;</p>
+            </div>
+            <p class="footers">
                 {{pluralize votes "Vote"}}, submitted by {{author}},
                 <a href="{{pathFor 'debatePage'}}">{{commentsCount}} comments</a>
                 {{#if ownDebate}}

@@ -15,6 +15,10 @@ Template.topicEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
+        if (this.votes > 10 || this.commentsCount > 0) {
+            return throwError('update topic denied, ' + 'this topic has already been fired!');
+        }
+
         var currentTopicId = this._id;
 
         var topicProperties = {

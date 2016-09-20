@@ -1,17 +1,17 @@
 <template name="topicSubmit">
     <form class="main form">
-        <div class="form-group {{errorClass 'url'}}">
-            <label class="control-label" for="url">URL</label>
+        <div class="form-group {{errorClass 'title'}}">
+            <label class="control-label" for="title">Topic</label>
             <div class="controls">
-                <input name="url" id="url" type="text" value="" placeholder="Your URL" class="form-control" />
-                <span class="help-block">{{errorMessage 'url'}}</span>
+                <input name="title" id="title" type="text" value="" placeholder="Name your topic" class="form-control" />
+                <span class="help-block">{{errorMessage 'title'}}</span>
             </div>
         </div>
-        <div class="form-group {{errorClass 'title'}}">
-            <label class="control-label" for="title">Title</label>
+        <div class="form-group {{errorClass 'url'}}">
+            <label class="control-label" for="url">Related URL</label>
             <div class="controls">
-                <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control" />
-                <span class="help-block">{{errorMessage 'title'}}</span>
+                <input name="url" id="url" type="text" value="" placeholder="Attach a related URL if needed" class="form-control" />
+                <span class="help-block">{{errorMessage 'url'}}</span>
             </div>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary" />

@@ -15,6 +15,10 @@ Template.debateEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
+        if (this.votes > 10 || this.commentsCount > 0 || this.positiveCount > 0 || this.negativeCount > 0) {
+            return throwError('update debate denied, ' + 'this debate has already been fired!');
+        }
+
         var $propositionString = $(e.target).find('[name=proposition]');
         var $urlString = $(e.target).find('[name=url]');
         var $positiveString = $(e.target).find('[name=positive]');
