@@ -127,6 +127,18 @@ Template.commentItem.helpers({
         var children = Comments.find({ parentId: this.comment._id }).count();
         return this.comment.userId === Meteor.userId() && children === 0;
     },
+    commentSide: function() {
+        if (this.comment.postType === 1 || this.needAlign) {
+            if (this.comment.side === 0)
+                return 'sideLeft';
+            if (this.comment.side === 1)
+                return 'sideRight';
+        }
+        return '';
+     },
+    isDebate: function() {
+        return this.comment.postType === 1;
+     }
 });
 
 Template.commentItem.events({

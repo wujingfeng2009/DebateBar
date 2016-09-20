@@ -12,16 +12,16 @@
             </div>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav">
-                    <li class="{{activeRouteClass 'home' 'Topics'}}">
+                    <li class="{{activeRouteClass 'home' 'Topics' 'topic'}}">
                     <a href="{{pathFor 'newTopics'}}">Topics</a>
                     </li>
-                    <li class="{{activeRouteClass  'Debates'}}">
+                    <li class="{{activeRouteClass  'Debates' 'debate'}}">
                     <a href="{{pathFor 'newDebates'}}">Debates</a>
                     </li>
-                    <li class="{{activeRouteClass  'Predictions'}}">
+                    <li class="{{activeRouteClass  'Predictions' 'prediction'}}">
                     <a href="{{pathFor 'newPredictions'}}">Predictions</a>
                     </li>
-                    <li class="{{activeRouteClass  'Bets'}}">
+                    <li class="{{activeRouteClass  'Bets' 'bet'}}">
                     <a href="{{pathFor 'newBets'}}">Bets</a>
                     </li>
                     {{#if currentUser}}

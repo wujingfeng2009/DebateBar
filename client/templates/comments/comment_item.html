@@ -1,14 +1,14 @@
 <template name="commentItem">
     <div class="comment-item {{timeline}}">
-        <div  class="comment {{alignment}} {{#if arrowNeeded}} {{arrowDirection}} {{/if}}">
-            <a href=" {{commentChainPath}}" class="comment-content {{alignment}}">
+        <div  class="comment {{alignment}} {{#if arrowNeeded}} {{arrowDirection}} {{/if}} {{commentSide}}">
+            <a href=" {{commentChainPath}}" class="comment-content {{commentSide}}">
                 <p>
                     <span class="author">{{comment.author}}</span>
                     <span class="date">  on {{submittedText}}</span>
                 </p>
-                <p class="text {{alignment}}">{{comment.body}}</p>
+                <p class="text {{commentSide}}">{{comment.body}}</p>
             </a>
-            <div  class="challenges {{alignment}}">
+            <div  class="challenges {{commentSide}}">
                 {{#if currentUser}}
                     <a href="#" class="submit-toggle"> Comment </a>
                 {{/if}}

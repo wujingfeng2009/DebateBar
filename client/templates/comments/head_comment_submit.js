@@ -8,14 +8,17 @@ Template.commentSubmit.helpers({
     },
     errorClass: function(field) {
         return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
-    }
+    },
+    isDebate: function() {
+        return this.postType === 1;
+     }
 });
 
 Template.commentSubmit.events({
     'submit form': function(e, template) {
         e.preventDefault();
 
-        console.log('jimvon submit comment, currentRouteName: ' + Router.current().route.getName());
+        console.log('jimvon submit comment, postType: ' + template.data.postType);
 
         if (template.data.postType < 0 || template.data.postType > 3)
             throw new Meteor.Error('invalid-comment', 'parent post have a invalid postType[' + template.data.comment.postType + '].');
@@ -29,6 +32,11 @@ Template.commentSubmit.events({
             postId: template.data._id,
             side: 0,
         };
+
+        if (comment.postType === 1) {
+            var $standpoint = $(e.target).find('input[name=standpoint]:checked');
+            comment.side = $standpoint.val() === 'positive' ? 0 : 1;
+        }
 
         console.log('jimvon call commentInsert, postId: ' + template.data._id);
         var errors = {};
