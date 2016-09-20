@@ -9,6 +9,11 @@
             {{#each predictions}} {{> predictionItem}} {{/each}}
         </div>
         {{#if nextRouterPath}}
-        <a class="load-more" href="{{nextRouterPath}}">Load more</a> {{else}} {{#unless ready}} {{> spinner}} {{/unless}} {{/if}}
+            <a class="load-more" href="{{nextRouterPath}}">Load more</a>
+        {{else}}
+            {{#unless ready}}
+                {{> spinner}}
+            {{/unless}}
+        {{/if}}
     </div>
 </template>

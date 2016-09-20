@@ -9,9 +9,12 @@ Template.commentSubmit.helpers({
     errorClass: function(field) {
         return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
     },
-    isDebate: function() {
+    isDebatePost: function() {
         return this.postType === 1;
-     }
+     },
+     isTopicPost: function() {
+        return this.postType === 0;
+     },
 });
 
 Template.commentSubmit.events({

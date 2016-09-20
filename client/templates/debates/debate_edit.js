@@ -15,21 +15,28 @@ Template.debateEdit.events({
     'submit form': function(e) {
         e.preventDefault();
 
+        var $propositionString = $(e.target).find('[name=proposition]');
+        var $urlString = $(e.target).find('[name=url]');
+        var $positiveString = $(e.target).find('[name=positive]');
+        var $negativeString = $(e.target).find('[name=negative]');
+
+        var debate = {
+            proposition: $propositionString.val(),
+            url: $urlString.val(),
+            positiveStandpoint: $positiveString.val(),
+            negativeStandpoint: $negativeString.val(),
+            postType: 1,
+        };
+
+        var errors = validateDebate(debate);
+        if (errors.proposition || errors.positive || errors.negative)
+            return Session.set('debateSubmitErrors', errors);
+
         var currentDebateId = this._id;
 
-        var debateProperties = {
-            url: $(e.target).find('[name=url]').val(),
-            title: $(e.target).find('[name=title]').val(),
-            postType: 1
-        }
+        console.log('debate edit, currentDebateId: ' + currentDebateId + ', debate: {proposition: ' + debate.proposition + '}');
 
-        var errors = validateDebate(debateProperties);
-        if (errors.title || errors.url)
-            return Session.set('debateEditErrors', errors);
-
-        console.log('debates submit, currentDebateId: ' + currentDebateId + ', debateProperties: {url: ' + debateProperties.url + ', title: ' + debateProperties.title + '}');
-
-        Meteor.call('postUpdate', currentDebateId, debateProperties, function(error, result) {
+        Meteor.call('postUpdate', currentDebateId, debate, function(error, result) {
             // 显示错误信息并退出
             if (error)
                 return throwError(error.reason);

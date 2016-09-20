@@ -120,10 +120,12 @@ body {
     font-size: 18px;
 }
 
-.post .post-content h3 a {
+.post .post-content h3 a,
+.post .post-content h3 .proposition {
     display: inline-block;
     font-size: 25px;
     margin-right: 10px;
+    text-decoration: none;
 }
 
 .post .post-content h3 span {

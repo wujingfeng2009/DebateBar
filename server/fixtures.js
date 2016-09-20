@@ -245,7 +245,7 @@ if (Posts.find().count() === 0) {
 
     for (var i = 0; i < 10; i++) {
         Posts.insert({
-            title: 'Test post #' + i,
+            title: 'Test topic #' + i,
             author: sacha.profile.name,
             postType: 0,
             userId: sacha._id,
@@ -260,7 +260,9 @@ if (Posts.find().count() === 0) {
 /* debates */
     for (var i = 0; i < 10; i++) {
         Posts.insert({
-            title: 'Test debate #' + i,
+            proposition: 'Test debate #' + i,
+            positiveStandpoint: 'Test debate #' + i + 'positive standpoint',
+            negativeStandpoint: 'Test debate #' + i + 'negative standpoint',
             author: sacha.profile.name,
             postType: 1,
             userId: sacha._id,

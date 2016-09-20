@@ -19,6 +19,11 @@ Template.debateItem.helpers({
         //console.log('post_item: { href: ' + a.href + ', hostname: ' + a.hostname + '}');
         return a.hostname;
     },
+    hasUrl: function() {
+        if (this.url && this.url != '')
+            return true;
+        return false;
+    },
     commentsCount: function() {
         return this.commentsCount;
     },
