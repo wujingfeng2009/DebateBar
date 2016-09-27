@@ -117,6 +117,11 @@ Template.commentItem.helpers({
     },
     needSubmit: function() {
         const instance = Template.instance();
+        var closeEditForm = Session.get('commentItemCloseSubmitForm');
+        if (closeEditForm && instance.state.get('submitFormOpen')) {
+            instance.state.set('submitFormOpen', false);
+            Session.set('commentItemCloseSubmitForm', false);
+        }
         return instance.state.get('submitFormOpen');
     },
     showLoginPrompt: function() {

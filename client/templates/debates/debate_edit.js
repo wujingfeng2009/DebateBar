@@ -52,6 +52,7 @@ Template.debateEdit.events({
             }
 
             //Router.go(Meteor.user().userContext.lastDebatesListPath);
+            Session.set('debateItemCloseEditForm', true);
         });
     }
 });

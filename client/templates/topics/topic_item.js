@@ -39,6 +39,11 @@ Template.topicItem.helpers({
     },
     needEdit: function() {
         const instance = Template.instance();
+        var closeEditForm = Session.get('topicItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('topicItemCloseEditForm', false);
+        }
         return instance.state.get('editFormOpen');
     }
 });
@@ -103,7 +108,7 @@ Template.topicItem.events({
         if (confirm("Delete this post?")) {
             var currentPostId = instance.data._id;
             Posts.remove(currentPostId);
-            Router.go('home');
+            //Router.go('home');
         }
     }
 });

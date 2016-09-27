@@ -40,6 +40,7 @@ Template.subCommentSubmit.events({
                 throwError(error.reason);
             } else {
                 $body.val('');
+                Session.set('commentItemCloseSubmitForm', true);
                 Router.go(Router.routes.commentChain.path({ _id: template.data.comment._id}));
             }
         });

@@ -45,6 +45,7 @@ Template.predictionEdit.events({
             }
 
             //Router.go(Meteor.user().userContext.lastDebatesListPath);
+            Session.set('predictionItemCloseEditForm', true);
         });
     }
 });

@@ -39,6 +39,11 @@ Template.predictionItem.helpers({
     },
     needEdit: function() {
         const instance = Template.instance();
+        var closeEditForm = Session.get('predictionItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('predictionItemCloseEditForm', false);
+        }
         return instance.state.get('editFormOpen');
     }
 });
@@ -46,7 +51,7 @@ Template.predictionItem.helpers({
 Template.predictionItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
-        Meteor.call('upvoteDebate', this._id);
+        Meteor.call('upvotePost', this._id);
     },
     'click .next-path': function(e, instance) {
         e.preventDefault();

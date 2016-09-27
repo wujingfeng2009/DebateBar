@@ -4,18 +4,22 @@
             <a href=" {{commentChainPath}}" class="comment-content">
                 <p class="comment-header {{commentSide}}">
                     <span class="author">{{comment.author}}</span>
-                    <span class="date">  on {{submittedText}}</span>
+                    <span class="date"> &nbsp; on {{submittedText}}</span>
                 </p>
                 <p class="text {{commentSide}}">{{comment.body}}</p>
             </a>
             <div  class="comment-footer {{commentSide}}">
                 {{#if currentUser}}
-                    <a href="#" class="submit-toggle"> Comment </a>
+                    <a href="#" class="submit-toggle"> {{#if isDebate}} oppose {{else}} comment {{/if}} &nbsp; </a>
                 {{/if}}
                 {{#if canDelete}}
-                    <a href="#" class="delete-comment" > Delete </a>
+                    <a href="#" class="delete-comment" > delete &nbsp; </a>
                 {{/if}}
-                    sub-comments: {{childCount}},  total-comments: {{childTotalCount}}
+                {{#if isDebate}}
+                    oppositions: {{childCount}}, &nbsp; total-contentions: {{childTotalCount}}
+                {{else}}
+                    sub-comments: {{childCount}}, &nbsp; total-comments: {{childTotalCount}}
+                {{/if}}
             </div>
             {{#if needSubmit}}
                     {{> subCommentSubmit comment=comment }}

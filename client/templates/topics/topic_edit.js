@@ -44,7 +44,8 @@ Template.topicEdit.events({
                 throwError('current user is not allowed to update current topic[' + currentTopicId + ']!');
             }
 
-            Router.go('home');
+            //Router.go('home');
+            Session.set('topicItemCloseEditForm', true);
         });
     }
 });

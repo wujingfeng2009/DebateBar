@@ -14,14 +14,14 @@
                 <p class="negative-standpoint">{{negativeStandpoint}} &nbsp; :negative</p>
             </div>
             <div class="debate-standpoints">
-                <p class="positive-percentage">&nbsp;</p>
-                <p class="negative-percentage">&nbsp;</p>
+                <p name="positive-percentage" class="positive-percentage" style = "{{positiveStyles}};">&nbsp; {{positivePercentage}}</p>
+                <p name="negative-percentage" class="negative-percentage" style = "{{negativeStyles}};">&nbsp; {{negativePercentage}}</p>
             </div>
             <p class="post-footer">
-                {{pluralize votes "Vote"}}, submitted by {{author}},
-                <a href="{{pathFor 'debatePage'}}">{{commentsCount}} comments</a>
+                {{pluralize votes "Vote"}}, &nbsp; submitted by {{author}}, &nbsp;
+                <a href="{{pathFor 'debatePage'}}">{{commentsCount}} contentions</a>
                 {{#if ownDebate}}
-                    <a href='#' class='edit-toggle'>Edit</a>
+                    <a href='#' class='edit-toggle'>&nbsp; edit</a>
                 {{/if}}
                 {{#if canDelete}}
                     <a href='#' class='delete-debate'>Delete</a>

@@ -40,18 +40,61 @@ Template.debateItem.helpers({
 
         if (currentRouteName === 'debatePage' || currentRouteName === 'commentChain' || currentRouteName === 'commentThread')
             return 'Back';
-        return 'Discuss';
+        return 'Debate';
     },
     needEdit: function() {
         const instance = Template.instance();
+        var closeEditForm = Session.get('debateItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('debateItemCloseEditForm', false);
+        }
         return instance.state.get('editFormOpen');
-    }
+    },
+    positivePercentage: function() {
+        return this.positiveCount;
+    },
+    positiveStyles: function() {
+        var total = this.positiveCount + this.negativeCount;
+        var percentage = total === 0 ? 0 : this.positiveCount * 100 / total;
+        console.log('jimvon in positiveStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
+        if (total === 0)
+            return 'width:' +  '50%; ' + 'background-color: rgba(0, 0, 0, 0);' + 'border-left: 1px solid blue; border-top: 1px solid blue; border-bottom: 1px solid blue;';
+        if (percentage === 0) {
+            return 'width:' +  '3%; ' + 'background-color: purple;' + 'border: 1px solid purple;';
+        }
+        if (percentage >= 97)
+            percentage = 97;
+        if (percentage <= 3)
+            percentage = 3;
+        console.log('jimvon in positiveStyles, percentage: ' + percentage);
+        return 'width:' + percentage.toFixed(0) + '%'  + '; border-left: 1px solid blue; border-top: 1px solid blue;  border-bottom: 1px solid blue;';
+    },
+    negativePercentage: function() {
+        return this.negativeCount;
+    },
+    negativeStyles: function() {
+        var total = this.positiveCount + this.negativeCount;
+        var percentage =  total === 0 ? 0 : this.negativeCount * 100 / total;
+        console.log('jimvon in negativeStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
+        if (total === 0)
+            return 'width:' +  '50%; ' + 'background-color: rgba(0, 0, 0, 0);' + 'border-right: 1px solid purple; border-top: 1px solid purple; border-bottom: 1px solid purple;';
+        if (percentage === 0 ) {
+            return 'width:' +  '3%; ' + 'background-color: blue;' + 'border: 1px solid blue;';
+        }
+        if (percentage >= 97)
+            percentage = 97;
+        if (percentage <= 3)
+            percentage = 3;
+        console.log('jimvon in negativeStyles, percentage: ' + percentage);
+        return 'width:' + percentage.toFixed(0) + '%'  + '; border-right: 1px solid purple; border-top: 1px solid purple;  border-bottom: 1px solid purple;';
+    },
 });
 
 Template.debateItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
-        Meteor.call('upvoteDebate', this._id);
+        Meteor.call('upvotePost', this._id);
     },
     'click .next-path': function(e, instance) {
         e.preventDefault();
@@ -112,3 +155,25 @@ Template.debateItem.events({
         }
     }
 });
+
+/*
+Template.debateItem.onRendered(function() {
+    var positivePercentage = this.find('[name=positive-percentage]');
+    var positiveCount = parseInt(this.data.positiveCount);
+    if (isNaN(positiveCount)) {
+        console.log('NaN value');
+        return;
+    }
+    positivePercentage.innerHTML = '%' + positiveCount;
+    console.log('jimvon in debateItem, positivePercentage: ' + positivePercentage.innerHTML);
+
+    var negativePercentage = this.find('[name=negative-percentage]');
+    var negativeCount = parseInt(this.data.negativeCount);
+    if (isNaN(negativeCount)) {
+        console.log('null value');
+        return;
+    }
+    negativePercentage.innerText = '%' + this.data.negativeCount;
+    console.log('jimvon in debateItem, negativePercentage: ' + negativePercentage.innerHTML);
+});
+*/

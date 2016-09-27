@@ -53,6 +53,18 @@ Template.commentSubmit.events({
                 throwError(error.reason);
             } else {
                 $body.val('');
+/*
+                var nextPath = null;
+                if (comment.postType === 0)
+                    nextPath = Router.routes.topicPage.path({ _id: comment.postId});
+                else if (comment.postType === 1)
+                    nextPath = Router.routes.debatePage.path({ _id: comment.postId});
+                else if (comment.postType === 2)
+                    nextPath = Router.routes.predictionPage.path({ _id: comment.postId});
+                else
+                    throw new Meteor.Error('invalid-comment', 'parent post have a invalid postType[' + comment.postType + '].');
+                Router.go(nextPath);
+*/
             }
         });
     }
