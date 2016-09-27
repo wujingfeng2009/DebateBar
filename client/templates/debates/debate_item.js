@@ -7,8 +7,19 @@ Template.debateItem.onCreated( function () {
 });
 
 Template.debateItem.helpers({
-    ownDebate: function() {
+    needEdit: function() {
+        if (this.commentsCount > 0)
+            return false;
         return this.userId === Meteor.userId();
+    },
+    showEditForm: function() {
+        const instance = Template.instance();
+        var closeEditForm = Session.get('debateItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('debateItemCloseEditForm', false);
+        }
+        return instance.state.get('editFormOpen');
     },
     canDelete: function() {
         return this.userId === Meteor.userId() && this.commentsCount === 0;
@@ -42,16 +53,7 @@ Template.debateItem.helpers({
             return 'Back';
         return 'Debate';
     },
-    needEdit: function() {
-        const instance = Template.instance();
-        var closeEditForm = Session.get('debateItemCloseEditForm');
-        if (closeEditForm && instance.state.get('editFormOpen')) {
-            instance.state.set('editFormOpen', false);
-            Session.set('debateItemCloseEditForm', false);
-        }
-        return instance.state.get('editFormOpen');
-    },
-    positivePercentage: function() {
+    positiveCount: function() {
         return this.positiveCount;
     },
     positiveStyles: function() {
@@ -70,7 +72,7 @@ Template.debateItem.helpers({
         console.log('jimvon in positiveStyles, percentage: ' + percentage);
         return 'width:' + percentage.toFixed(0) + '%'  + '; border-left: 1px solid blue; border-top: 1px solid blue;  border-bottom: 1px solid blue;';
     },
-    negativePercentage: function() {
+    negativeCount: function() {
         return this.negativeCount;
     },
     negativeStyles: function() {

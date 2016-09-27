@@ -16,6 +16,7 @@ Template.debateEdit.events({
         e.preventDefault();
 
         if (this.votes > 10 || this.commentsCount > 0 || this.positiveCount > 0 || this.negativeCount > 0) {
+            //Session.set('debateItemCloseEditForm', true);
             return throwError('update debate denied, ' + 'this debate has already been fired!');
         }
 
@@ -33,8 +34,10 @@ Template.debateEdit.events({
         };
 
         var errors = validateDebate(debate);
-        if (errors.proposition || errors.positive || errors.negative)
+        if (errors.proposition || errors.positive || errors.negative) {
+            //Session.set('debateItemCloseEditForm', true);
             return Session.set('debateSubmitErrors', errors);
+        }
 
         var currentDebateId = this._id;
 

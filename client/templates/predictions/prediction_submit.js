@@ -7,8 +7,7 @@ Template.predictionSubmit.events({
         var prediction = {
             url: $urlString.val(),
             title: $titleString.val(),
-            postType: 2,
-            proposition: ''
+            postType: 2
         };
 
         var errors = validatePrediction(prediction);

@@ -14,22 +14,22 @@
                 <p class="negative-standpoint">{{negativeStandpoint}} &nbsp; :negative</p>
             </div>
             <div class="debate-standpoints">
-                <p name="positive-percentage" class="positive-percentage" style = "{{positiveStyles}};">&nbsp; {{positivePercentage}}</p>
-                <p name="negative-percentage" class="negative-percentage" style = "{{negativeStyles}};">&nbsp; {{negativePercentage}}</p>
+                <p name="positive-percentage" class="positive-percentage" style = "{{positiveStyles}};">&nbsp; {{positiveCount}}</p>
+                <p name="negative-percentage" class="negative-percentage" style = "{{negativeStyles}};">&nbsp; {{negativeCount}}</p>
             </div>
             <p class="post-footer">
-                {{pluralize votes "Vote"}}, &nbsp; submitted by {{author}}, &nbsp;
+                submitted by {{author}}, &nbsp; {{pluralize votes "Vote"}}, &nbsp;
                 <a href="{{pathFor 'debatePage'}}">{{commentsCount}} contentions</a>
-                {{#if ownDebate}}
-                    <a href='#' class='edit-toggle'>&nbsp; edit</a>
+                {{#if needEdit}}
+                    <a href='#' class='edit-toggle'>&nbsp; Edit</a>
                 {{/if}}
                 {{#if canDelete}}
-                    <a href='#' class='delete-debate'>Delete</a>
+                    <a href='#' class='delete-debate'>&nbsp; Delete</a>
                 {{/if}}
             </p>
         </div>
         <a href="#" class="discuss btn btn-default next-path" >{{navigateText}}</a>
-        {{#if needEdit}}
+        {{#if showEditForm}}
             {{> debateEdit }}
         {{/if}}
     </div>

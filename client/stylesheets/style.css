@@ -225,6 +225,10 @@ body {
     clear: both;
 }
 
+.post .post-content .post-footer a{
+    text-decoration: none;
+}
+
 .post .discuss {
     display: inline-block;
     float: right;
@@ -438,6 +442,10 @@ body {
     color:#CD5C5C;
     margin-left: 15px;
     float: left;
+}
+
+.comment .comment-footer a{
+    text-decoration: none;
 }
 
 .comment .comment-submit-embedded-form {

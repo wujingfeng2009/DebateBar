@@ -7,8 +7,19 @@ Template.predictionItem.onCreated( function () {
 });
 
 Template.predictionItem.helpers({
-    ownPrediction: function() {
+    needEdit: function() {
+        if (this.commentsCount > 0)
+            return false;
         return this.userId === Meteor.userId();
+    },
+    showEditForm: function() {
+        const instance = Template.instance();
+        var closeEditForm = Session.get('predictionItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('predictionItemCloseEditForm', false);
+        }
+        return instance.state.get('editFormOpen');
     },
     canDelete: function() {
         return this.userId === Meteor.userId() && this.commentsCount === 0;
@@ -37,15 +48,6 @@ Template.predictionItem.helpers({
             return 'Back';
         return 'Discuss';
     },
-    needEdit: function() {
-        const instance = Template.instance();
-        var closeEditForm = Session.get('predictionItemCloseEditForm');
-        if (closeEditForm && instance.state.get('editFormOpen')) {
-            instance.state.set('editFormOpen', false);
-            Session.set('predictionItemCloseEditForm', false);
-        }
-        return instance.state.get('editFormOpen');
-    }
 });
 
 Template.predictionItem.events({

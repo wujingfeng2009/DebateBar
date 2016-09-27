@@ -6,7 +6,7 @@
             <p class="post-footer">
                 {{pluralize votes "Vote"}}, submitted by {{author}},
                 <a href="{{pathFor 'predictionPage'}}">{{commentsCount}} comments</a>
-                {{#if ownPrediction}}
+                {{#if needEdit}}
                     <a href='#' class='edit-toggle'>Edit</a>
                 {{/if}}
                 {{#if canDelete}}
@@ -15,7 +15,7 @@
             </p>
         </div>
         <a href="#" class="discuss btn btn-default next-path" >{{navigateText}}</a>
-        {{#if needEdit}}
+        {{#if showEditForm}}
             {{> predictionEdit }}
         {{/if}}
     </div>

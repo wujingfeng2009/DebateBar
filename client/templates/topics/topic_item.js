@@ -7,8 +7,19 @@ Template.topicItem.onCreated( function () {
 });
 
 Template.topicItem.helpers({
-    ownPost: function() {
+    needEdit: function() {
+        if (this.commentsCount > 0)
+            return false;
         return this.userId === Meteor.userId();
+    },
+    showEditForm: function() {
+        const instance = Template.instance();
+        var closeEditForm = Session.get('topicItemCloseEditForm');
+        if (closeEditForm && instance.state.get('editFormOpen')) {
+            instance.state.set('editFormOpen', false);
+            Session.set('topicItemCloseEditForm', false);
+        }
+        return instance.state.get('editFormOpen');
     },
     canDelete: function() {
         return this.userId === Meteor.userId() && this.commentsCount === 0;
@@ -37,15 +48,6 @@ Template.topicItem.helpers({
             return 'Back';
         return 'Discuss';
     },
-    needEdit: function() {
-        const instance = Template.instance();
-        var closeEditForm = Session.get('topicItemCloseEditForm');
-        if (closeEditForm && instance.state.get('editFormOpen')) {
-            instance.state.set('editFormOpen', false);
-            Session.set('topicItemCloseEditForm', false);
-        }
-        return instance.state.get('editFormOpen');
-    }
 });
 
 Template.topicItem.events({
