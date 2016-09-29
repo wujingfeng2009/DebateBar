@@ -58,29 +58,36 @@ Template.debateItem.helpers({
     },
     positiveStyles: function() {
         var total = this.positiveCount + this.negativeCount;
-        var percentage = total === 0 ? 0 : this.positiveCount * 100 / total;
-        console.log('jimvon in positiveStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
         if (total === 0)
             return 'width:' +  '50%; ' + 'background-color: rgba(0, 0, 0, 0);' + 'border-left: 1px solid blue; border-top: 1px solid blue; border-bottom: 1px solid blue;';
+
+        var percentage = this.positiveCount * 100 / total;
+        percentage = percentage.toFixed(0);
+        console.log('jimvon in positiveStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
         if (percentage === 0) {
             return 'width:' +  '3%; ' + 'background-color: purple;' + 'border: 1px solid purple;';
         }
+
         if (percentage >= 97)
             percentage = 97;
         if (percentage <= 3)
             percentage = 3;
         console.log('jimvon in positiveStyles, percentage: ' + percentage);
-        return 'width:' + percentage.toFixed(0) + '%'  + '; border-left: 1px solid blue; border-top: 1px solid blue;  border-bottom: 1px solid blue;';
+        return 'width:' + percentage + '%'  + '; border-left: 1px solid blue; border-top: 1px solid blue;  border-bottom: 1px solid blue;';
     },
     negativeCount: function() {
         return this.negativeCount;
     },
     negativeStyles: function() {
         var total = this.positiveCount + this.negativeCount;
-        var percentage =  total === 0 ? 0 : this.negativeCount * 100 / total;
-        console.log('jimvon in negativeStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
         if (total === 0)
             return 'width:' +  '50%; ' + 'background-color: rgba(0, 0, 0, 0);' + 'border-right: 1px solid purple; border-top: 1px solid purple; border-bottom: 1px solid purple;';
+
+        var percentage =  this.positiveCount * 100 / total;
+        percentage = percentage.toFixed(0);
+        console.log('jimvon in negativeStyles, positiveCount: ' + this.positiveCount + '. negativeCount: ' + this.negativeCount + '. percentage: ' + percentage);
+
+        percentage = 100 - percentage; // calculate negative percentage from positive one directly.
         if (percentage === 0 ) {
             return 'width:' +  '3%; ' + 'background-color: blue;' + 'border: 1px solid blue;';
         }
@@ -89,7 +96,7 @@ Template.debateItem.helpers({
         if (percentage <= 3)
             percentage = 3;
         console.log('jimvon in negativeStyles, percentage: ' + percentage);
-        return 'width:' + percentage.toFixed(0) + '%'  + '; border-right: 1px solid purple; border-top: 1px solid purple;  border-bottom: 1px solid purple;';
+        return 'width:' + percentage + '%'  + '; border-right: 1px solid purple; border-top: 1px solid purple;  border-bottom: 1px solid purple;';
     },
 });
 

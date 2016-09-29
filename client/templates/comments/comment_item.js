@@ -141,12 +141,25 @@ Template.commentItem.helpers({
         }
         return '';
      },
+    upvotedClass: function() {
+        var userId = Meteor.userId();
+        if (userId && !_.include(this.comment.upvoters, userId)
+            && this.comment.userId != userId) {
+            return 'btn-primary upvotable';
+        } else {
+            return 'disabled';
+        }
+    },
     isDebate: function() {
         return this.comment.postType === 1;
      }
 });
 
 Template.commentItem.events({
+    'click .upvotable': function(e) {
+        e.preventDefault();
+        Meteor.call('upvoteComment', this.comment._id);
+    },
     'click .submit-toggle': function(e, instance) {
         instance.state.set('submitFormOpen', !instance.state.get('submitFormOpen'));
         e.preventDefault();
@@ -155,7 +168,7 @@ Template.commentItem.events({
         e.preventDefault();
 
         if (this.comment.userId != Meteor.userId()) {
-            console.log('jimvon this.userId: ' + this.userId + 'Meteor.userId: ' + Meteor.userId());
+            console.log('jimvon this.userId: ' + this.comment.userId + 'Meteor.userId: ' + Meteor.userId());
             throwError('invalid user, delete denied!');
             return;
         }

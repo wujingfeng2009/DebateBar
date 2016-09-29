@@ -1,6 +1,7 @@
 <template name="commentItem">
     <div class="comment-item {{timeline}}">
         <div  class="comment {{alignment}} {{#if arrowNeeded}} {{arrowDirection}} {{/if}} {{commentSide}}">
+            <a href="#" class="upvote btn btn-default {{upvotedClass}} {{commentSide}}">⬆</a>
             <a href=" {{commentChainPath}}" class="comment-content">
                 <p class="comment-header {{commentSide}}">
                     <span class="author">{{comment.author}}</span>
