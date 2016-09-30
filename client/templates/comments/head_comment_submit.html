@@ -10,18 +10,18 @@
                 {{/if}}
                 <textarea name="body" id="body" class="form-control" rows="3"></textarea>
                 <span class="help-block">{{errorMessage 'body'}}</span>
+                <button type="submit" class="btn btn-primary">
+                    {{#if isDebatePost}}
+                        Add debate
+                    {{else}}
+                        Add Comment
+                    {{/if}}
+                </button>
                 {{#if isDebatePost}}
-                    <input type="radio" name="standpoint" value="positive" checked /> Positive side
-                    <input type="radio" name="standpoint" value="negative" /> Negative side
+                    &nbsp; &nbsp; <input type="radio" name="standpoint" value="positive" checked /> Positive side
+                    &nbsp; &nbsp; <input type="radio" name="standpoint" value="negative" /> Negative side
                 {{/if}}
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">
-            {{#if isDebatePost}}
-                Add debate
-            {{else}}
-                Add Comment
-            {{/if}}
-        </button>
     </form>
 </template>
