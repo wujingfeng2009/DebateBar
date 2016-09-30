@@ -9,7 +9,14 @@ Template.notifications.helpers({
 
 Template.notificationItem.helpers({
     notificationPostPath: function() {
-        return Router.routes.topicPage.path({ _id: this.postId });
+        if (this.postType === 0)
+            return Router.routes.topicPage.path({ _id: this.postId });
+        else if (this.postType === 1)
+            return Router.routes.debatePage.path({ _id: this.postId });
+        else if (this.postType === 2)
+            return Router.routes.predictionPage.path({ _id: this.postId });
+        else if (this.postType === 3)
+            return Router.routes.betPage.path({ _id: this.postId });
     }
 });
 
