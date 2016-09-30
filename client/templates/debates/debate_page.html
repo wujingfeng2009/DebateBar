@@ -5,10 +5,17 @@
     {{else}}
         <div>Please log in to leave your opinion.</div>
     {{/if}}
-    <div class="comments">
-    {{#each com in comments}}
+    <div class="comments debate-columns">
+        <div class="left-column">
+            {{#each com in positiveStandpoints}}
                 {{> commentItem comment = com needAlign = false}}
-    {{/each}}
+            {{/each}}
+        </div>
+        <div class="right-column">
+            {{#each com in negativeStandpoints}}
+                {{> commentItem comment = com needAlign = false}}
+            {{/each}}
+        </div>
     </div>
 </template>
 

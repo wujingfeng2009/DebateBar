@@ -130,7 +130,7 @@ Template.commentItem.helpers({
     },
     canDelete: function() {
         var children = Comments.find({ parentId: this.comment._id }).count();
-        return this.comment.userId === Meteor.userId() && children === 0;
+        return this.comment.userId === Meteor.userId() && children === 0 && this.comment.votes < 2;
     },
     commentSide: function() {
         if (this.comment.postType === 1 || this.needAlign) {
@@ -174,7 +174,11 @@ Template.commentItem.events({
         }
         var children = Comments.find({ parentId: this.comment._id }).count();
         if (children > 0) {
-            throwError('can not delete a comment that have sub-comments, delete denied!');
+            throwError('delete denied! can not delete a comment that have sub-comments!');
+            return;
+        }
+        if (this.comment.votes >= 2) {
+            throwError('delete denied! can not delete a comment that has been voted more than twice!');
             return;
         }
 

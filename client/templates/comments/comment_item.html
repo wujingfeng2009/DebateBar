@@ -21,6 +21,7 @@
                 {{else}}
                     sub-comments: {{childCount}}, &nbsp; total-comments: {{childTotalCount}}
                 {{/if}}
+                &nbsp; {{pluralize comment.votes "Vote"}}
             </div>
             {{#if needSubmit}}
                     {{> subCommentSubmit comment=comment }}

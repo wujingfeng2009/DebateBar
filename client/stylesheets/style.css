@@ -259,6 +259,23 @@ body {
     margin: 0;
 }
 
+.debate-columns {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    //background-color: #FFFCEC;
+}
+
+.debate-columns .left-column {
+    float: left;
+    width: 49.5%;
+}
+
+.debate-columns .right-column {
+    float: right;
+    width: 49.5%;
+}
+
 .comment-item {
     display: block;
     width: 100%;
