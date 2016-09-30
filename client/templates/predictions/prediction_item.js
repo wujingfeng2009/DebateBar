@@ -35,7 +35,8 @@ Template.predictionItem.helpers({
     },
     upvotedClass: function() {
         var userId = Meteor.userId();
-        if (userId && !_.include(this.upvoters, userId)) {
+        if (userId && !_.include(this.upvoters, userId)
+            && this.userId != userId) {
             return 'btn-primary upvotable';
         } else {
             return 'disabled';
